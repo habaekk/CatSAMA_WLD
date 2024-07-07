@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function Home() {
   const images = [
@@ -23,15 +24,15 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 relative">
-      <div className="absolute top-4 right-4 cursor-pointer">
+      <Link href="/user" className="absolute top-4 right-4 cursor-pointer">
         <Image
-          src="/user_icon.webp" // 사용자 아이콘 이미지 파일 경로
+          src="/user.png" // 사용자 아이콘 이미지 파일 경로
           alt="User Icon"
           width={40}
           height={40}
           className="rounded-full"
         />
-      </div>
+      </Link>
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">캣사마</h1>
         <p className="text-lg text-gray-500">우리 집의 귀여운 고양이</p>
