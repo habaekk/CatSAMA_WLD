@@ -24,7 +24,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 relative">
+    <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
       <Link href="/user" className="absolute top-4 right-4 cursor-pointer">
         <Image
           src="/user.png" // 사용자 아이콘 이미지 파일 경로
@@ -34,6 +34,14 @@ export default function Home() {
           className="rounded-full"
         />
       </Link>
+      <div className="absolute top-4 left-4">
+        <Image
+          src="/logo.webp" // 로고 이미지 파일 경로
+          alt="Logo"
+          width={40}
+          height={40}
+        />
+      </div>
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">캣사마</h1>
         <p className="text-lg text-gray-500">우리 집의 귀여운 고양이</p>
