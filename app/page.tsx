@@ -8,6 +8,7 @@ export default function Home() {
   const images = [
     "/cat/cat_sit.webp",
     "/cat/cat_sleep.webp",
+    "/cat/cat_sit2.webp",
     "/cat/cat_walk.webp",
     "/cat/cat_eat.webp"
   ];
@@ -47,7 +48,7 @@ export default function Home() {
         />
       </div>
       <div className="text-center mt-8">
-        <p className="text-lg text-gray-500">Cat as a Service</p>
+        <p className="text-lg text-gray-500">CaaS - Cat as a Service</p>
       </div>
     </main>
   );
