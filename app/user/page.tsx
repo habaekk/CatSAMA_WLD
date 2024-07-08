@@ -1,6 +1,7 @@
 
 import Image from 'next/image';
 import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 export default function UserPage() {
   return (
@@ -36,6 +37,8 @@ export default function UserPage() {
         </div>
         <p className="text-sm"></p>
       </div>
+
+      <Footer />
     </div>
   );
 }
