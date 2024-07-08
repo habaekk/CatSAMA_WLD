@@ -9,7 +9,7 @@ interface LayoutProps {
 export default function UserLayout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow p-8">
+      <main>
         {children}
       </main>
     </div>
