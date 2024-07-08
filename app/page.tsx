@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from 'next/link';
+import Header from './component/Header'; // Header 컴포넌트 임포트
 
 export default function Home() {
   const images = [
     "/cat/cat_sit.webp",
     "/cat/cat_sleep.webp",
+    "/cat/cat_lie.webp",
     "/cat/cat_sit2.webp",
     "/cat/cat_walk.webp",
     "/cat/cat_eat.webp"
@@ -25,23 +26,7 @@ export default function Home() {
 
   return (
     <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
-      <Link href="/user" className="absolute top-4 right-4 cursor-pointer">
-        <Image
-          src="/user.png" // 사용자 아이콘 이미지 파일 경로
-          alt="User Icon"
-          width={40}
-          height={40}
-          className="rounded-full"
-        />
-      </Link>
-      <div className="absolute top-4 left-4">
-        <Image
-          src="/logo.webp" // 로고 이미지 파일 경로
-          alt="Logo"
-          width={40}
-          height={40}
-        />
-      </div>
+      <Header /> {/* Header 컴포넌트 사용 */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">캣사마</h1>
         <p className="text-lg text-gray-500">우리 집의 귀여운 고양이</p>
