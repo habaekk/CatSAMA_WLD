@@ -1,9 +1,20 @@
-
 import Image from 'next/image';
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import { IDKitWidget, VerificationLevel } from '@worldcoin/idkit';
 
 export default function UserPage() {
+  const onSuccess = (result) => {
+    // 인증 성공 시 실행되는 코드
+    console.log('Verification successful:', result);
+    window.alert(`Successfully verified with World ID! Your nullifier hash is: ` + result.nullifier_hash);
+  };
+
+  const handleVerify = (result) => {
+    // 증명이 수신될 때 실행되는 선택적 콜백
+    console.log('Proof received:', result);
+  };
+
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
       <Header />
@@ -20,10 +31,6 @@ export default function UserPage() {
         <p className="text-2xl font-bold">월드코인 앱을 이용하여 로그인하세요</p>
       </div>
 
-      {/* 중앙 QR 코드 영역 */}
-      <div className="border-2 border-gray-400 p-8 mb-8">
-        <p className="text-4xl">QR</p>
-      </div>
 
       {/* QR 코드 아래의 텍스트 */}
       <div className="mb-8">
