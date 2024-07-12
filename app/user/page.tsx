@@ -34,8 +34,8 @@ export default function UserPage() {
       </div>
 
       <IDKitWidget
-        app_id="app_GBkZ1KlVUdFTjeMXKlVUdFT" // Developer Portal에서 얻은 app_id
-        action="vote_1" // Developer Portal에서 얻은 action id
+        app_id={process.env.NEXT_PUBLIC_APP_ID} // 환경 변수에서 가져온 app_id
+        action={process.env.NEXT_PUBLIC_ACTION_ID} // 환경 변수에서 가져온 action id
         onSuccess={onSuccess} // 인증 성공 시 실행되는 콜백 함수
         handleVerify={handleVerify} // 증명 수신 시 실행되는 선택적 콜백 함수
         verification_level={VerificationLevel.Device}
