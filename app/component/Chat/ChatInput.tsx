@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 
 interface ChatInputProps {
@@ -16,12 +14,19 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="flex p-4 border-t border-gray-200">
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Type a message..."
         className="flex-grow border border-gray-300 rounded-lg p-2 mr-2"
       />
