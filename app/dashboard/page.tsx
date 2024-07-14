@@ -6,11 +6,11 @@ export default function DashBoard() {
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-between p-6 relative">
       <Header />
-      <div className="flex flex-col items-center justify-center w-full flex-grow">
+      <div className="flex flex-col items-center justify-center w-full flex-grow h-full">
         <iframe
           src="http://127.0.0.1:8123"
           title="Home Assistant"
-          className="w-full h-96 border border-gray-300 rounded-lg"
+          className="w-full h-[80vh] border border-gray-300 rounded-lg"
         ></iframe>
       </div>
       <Footer />
