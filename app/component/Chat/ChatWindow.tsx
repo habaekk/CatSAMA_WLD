@@ -26,7 +26,7 @@ const ChatWindow: React.FC = () => {
 
   const chat = async (messages: Message[]): Promise<Message> => {
     const body = {
-      model: 'llama3',
+      model: 'Ccat',
       messages: messages,
     };
 
