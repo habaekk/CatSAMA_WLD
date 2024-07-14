@@ -1,19 +1,19 @@
-// pages/settings/page.tsx
-
 import React from 'react';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
 export default function DashBoard() {
   return (
-    <div className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
-        <Header />
-        <div>
-            <h2>Welcome to the DashBoard Page</h2>
-            <p>Here you can customize your settings.</p>
-        </div>
-        <Footer />
-        
+    <div className="main-content flex min-h-screen flex-col items-center justify-between p-6 relative">
+      <Header />
+      <div className="flex flex-col items-center justify-center w-full flex-grow">
+        <iframe
+          src="http://127.0.0.1:8123"
+          title="Home Assistant"
+          className="w-full h-96 border border-gray-300 rounded-lg"
+        ></iframe>
+      </div>
+      <Footer />
     </div>
   );
-};
+}
