@@ -13,6 +13,9 @@ export default function Header() {
             height={40}
           />
         </Link>
+        <Link href="/dashboard" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
+          DashBoard
+        </Link>
         <Link href="/LLM" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
           Cat LLM
         </Link>
