@@ -1,3 +1,3 @@
 catSAMA-WLD project
 
-HomeIO
+HomeIOT(HA) + LLM(llama3) + BlockChain(WLD)
