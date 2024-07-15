@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="w-full flex justify-between items-center p-4 absolute top-0 left-0 bg-white">
+    <header className="w-full flex justify-between items-center p-4 absolute top-0 left-0 bg-white dark:bg-gray-800 text-black dark:text-white">
       <div className="flex items-center space-x-4">
         <Link href="/" className="cursor-pointer">
           <Image
@@ -13,16 +13,16 @@ export default function Header() {
             height={40}
           />
         </Link>
-        <Link href="/dashboard" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
+        <Link href="/dashboard" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           DashBoard
         </Link>
-        <Link href="/LLM" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
+        <Link href="/LLM" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           Cat LLM
         </Link>
-        <Link href="/commerce" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
+        <Link href="/commerce" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           Commerce
         </Link>
-        <Link href="/settings" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer">
+        <Link href="/settings" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           Settings
         </Link>
       </div>

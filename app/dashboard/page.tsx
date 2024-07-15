@@ -4,7 +4,7 @@ import Footer from '../component/Footer';
 
 export default function DashBoard() {
   return (
-    <div className="main-content flex min-h-screen flex-col items-center justify-between p-6 relative">
+    <div className="main-content flex min-h-screen flex-col items-center justify-between p-6 relative dark:text-white dark:text-white dark:bg-gray-800">
       <Header />
       <div className="flex flex-col items-center justify-center w-full flex-grow h-full">
         <iframe

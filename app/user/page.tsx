@@ -18,7 +18,7 @@ function handleVerify(result) {
 
 export default function UserPage() {
   return (
-    <div className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
+    <div className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white dark:bg-gray-800">
       <Header />
 
       {/* 이미지와 텍스트 섹션 */}
