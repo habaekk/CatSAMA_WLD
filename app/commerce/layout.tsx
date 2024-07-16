@@ -8,7 +8,7 @@ interface LayoutProps {
 
 export default function CommerceLayout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className='dark:bg-gray-800'>
       {children}
     </div>
   );

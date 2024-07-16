@@ -8,7 +8,7 @@ interface LayoutProps {
 
 export default function DashBoardLayout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className='dark:bg-gray-800'>
       {children}
     </div>
   );

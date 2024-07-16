@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative">
+    <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white">
       <Header /> {/* Header 컴포넌트 사용 */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">캣사마</h1>
