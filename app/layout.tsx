@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import ThemeProvider from './component/ThemeProvider';
 import RecoilRootProvider from './component/RecoilRootProvider';
+import DarkMode from './component/DarkMode';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,10 +22,10 @@ export default function RootLayout({
     <html lang="kr">
       <body className='${inter.className} dark:bg-gray-800'>
         <RecoilRootProvider>
-          <ThemeProvider>
             {children}
-          </ThemeProvider>
+            <DarkMode />
         </RecoilRootProvider>
+        
       </body>
     </html>
   );
