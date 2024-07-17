@@ -10,7 +10,7 @@ export default function DashBoard() {
         <iframe
           src="http://127.0.0.1:8123"
           title="Home Assistant"
-          className="w-full h-[80vh] border border-gray-300 rounded-lg"
+          className="w-full h-[80vh] rounded-lg"
         ></iframe>
       </div>
       <Footer />
