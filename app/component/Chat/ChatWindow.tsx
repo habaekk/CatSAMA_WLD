@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 
@@ -10,19 +10,20 @@ interface Message {
 }
 
 const initialMessages: Message[] = [
-    {
-        role: 'system',
-        content: `
-        You are a cat assistant called catSAMA. 
-        Use emoji to be cute. Use grammatically correct words.
-        You are a part of home IOT system with Home Assistant (Open source program)
-        `,
-        },
+  {
+    role: 'system',
+    content: `
+    You are a cat assistant called catSAMA. 
+    Use emoji to be cute. Use grammatically correct words.
+    You are a part of home IOT system with Home Assistant (Open source program)
+    `,
+  },
 ];
 
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [loading, setLoading] = useState(false);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
   const chat = async (messages: Message[]): Promise<Message> => {
     const body = {
@@ -68,9 +69,15 @@ const ChatWindow: React.FC = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
-    <div className="flex flex-col h-[80vh] max-w-md w-full border border-gray-300 rounded-lg overflow-hidden">
-      <div className="flex-grow p-4 overflow-auto">
+    <div className="flex flex-col h-[80vh] max-w w-full border border-gray-300 rounded-lg overflow-hidden">
+      <div className="flex-grow p-4 overflow-auto" ref={chatWindowRef}>
         {messages
           .filter((msg) => msg.role !== 'system')
           .map((msg, index) => (
