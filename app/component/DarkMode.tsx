@@ -2,15 +2,19 @@
 
 import { useRecoilState } from 'recoil';
 import { darkModeState } from '../state/theme';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
-const DarkModeToggle = () => {
+const DarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useRecoilState(darkModeState);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedDarkMode);
-    document.documentElement.classList.toggle('dark', savedDarkMode);
+    if (savedDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, [setIsDarkMode]);
 
   return (
@@ -18,4 +22,4 @@ const DarkModeToggle = () => {
   )
 };
 
-export default DarkModeToggle;
+export default DarkMode;

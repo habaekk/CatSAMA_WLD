@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import ThemeProvider from './component/ThemeProvider';
 import RecoilRootProvider from './component/RecoilRootProvider';
 import DarkMode from './component/DarkMode';
 
@@ -20,6 +19,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const darkMode = localStorage.getItem('darkMode') === 'true';
+                if (darkMode) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className='${inter.className} dark:bg-gray-800'>
         <RecoilRootProvider>
             {children}
