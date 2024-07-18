@@ -76,8 +76,8 @@ const ChatWindow: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-[80vh] max-w w-full border border-gray-300 rounded-lg overflow-hidden">
-      <div className="flex-grow p-4 overflow-auto" ref={chatWindowRef}>
+    <div className="flex flex-col h-[80vh] max-w w-full border border-gray-300 rounded-lg overflow-hidden dark:border-gray-700">
+      <div className="flex-grow p-4 overflow-auto dark:bg-gray-800" ref={chatWindowRef}>
         {messages
           .filter((msg) => msg.role !== 'system')
           .map((msg, index) => (
@@ -89,7 +89,7 @@ const ChatWindow: React.FC = () => {
               isOwnMessage={msg.role === 'user'}
             />
           ))}
-        {loading && <div className="text-gray-500">Assistant is typing...</div>}
+        {loading && <div className="text-gray-500 dark:text-gray-400">Assistant is typing...</div>}
       </div>
       <ChatInput onSendMessage={handleSendMessage} />
     </div>
