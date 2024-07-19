@@ -1,8 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Header from "../component/Header";
-import Footer from "../component/Footer";
 import { IDKitWidget, VerificationLevel } from '@worldcoin/idkit';
 
 function onSuccess(result) {
@@ -19,8 +17,6 @@ function handleVerify(result) {
 export default function UserPage() {
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white">
-      <Header />
-
       {/* 이미지와 텍스트 섹션 */}
       <div className="flex items-center mb-8">
         <Image
@@ -49,9 +45,6 @@ export default function UserPage() {
           </button>
         )}
       </IDKitWidget>
-
-
-      <Footer />
     </div>
   );
 }

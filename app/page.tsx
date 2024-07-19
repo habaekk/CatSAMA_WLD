@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Header from './component/Header'; // Header 컴포넌트 임포트
-import Footer from './component/Footer'; // Footer 컴포넌트 임포트
 
 export default function Home() {
   const images = [
@@ -27,7 +25,6 @@ export default function Home() {
 
   return (
     <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white">
-      <Header /> {/* Header 컴포넌트 사용 */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold">캣사마</h1>
         <p className="text-lg text-gray-500">우리 집의 귀여운 고양이</p>
@@ -44,7 +41,6 @@ export default function Home() {
       <div className="text-center mt-8">
         <p className="text-lg text-gray-500">CaaS - Cat as a Service</p>
       </div>
-      <Footer /> {/* Footer 컴포넌트 사용 */}
     </main>
   );
 }

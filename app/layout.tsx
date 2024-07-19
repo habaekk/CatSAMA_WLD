@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import RecoilRootProvider from './component/RecoilRootProvider';
 import DarkMode from './component/DarkMode';
-
+import Header from './component/Header';
+import Footer from './component/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,12 +36,19 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className='${inter.className} dark:bg-gray-800'>
+      <body className={`${inter.className} dark:bg-gray-800`}>
         <RecoilRootProvider>
+          <header>
+            <Header />            
+          </header>
+          <main className="main-content">
             {children}
-            <DarkMode />
+          </main>
+          <footer>
+            <Footer />
+          </footer>
+          <DarkMode />
         </RecoilRootProvider>
-        
       </body>
     </html>
   );
