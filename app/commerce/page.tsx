@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import CategoryCard from '../component/CategoryCard';
+import CategoryCard from '../components/CategoryCard';
 
 const categories = [
   { title: 'Smart Home', link: '/smart_home' },

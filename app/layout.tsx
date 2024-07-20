@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import RecoilRootProvider from './component/RecoilRootProvider';
-import DarkMode from './component/DarkMode';
-import Header from './component/Header';
-import Footer from './component/Footer';
+import RecoilRootProvider from './components/RecoilRootProvider';
+import DarkMode from './components/DarkMode';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 

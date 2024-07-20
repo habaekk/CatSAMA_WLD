@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatWindow from '../component/Chat/ChatWindow';
+import ChatWindow from '../components/Chat/ChatWindow';
 
 export default function LLM() {
   return (
