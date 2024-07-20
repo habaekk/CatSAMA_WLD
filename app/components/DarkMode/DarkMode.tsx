@@ -1,7 +1,7 @@
 'use client';
 
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../state/theme';
+import { darkModeState } from '../../state/theme';
 import { useLayoutEffect } from 'react';
 
 const DarkMode = () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import DarkModeToggle from '../components/DarkModeToggle';
+import DarkModeToggle from '../components/DarkMode/DarkModeToggle';
 
 export default function Settings() {
   return (

@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../state/theme';
+import { darkModeState } from '../../state/theme';
 import { useEffect, useState } from 'react';
 
 const DarkModeToggle = () => {

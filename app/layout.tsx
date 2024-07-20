@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import RecoilRootProvider from './components/RecoilRootProvider';
-import DarkMode from './components/DarkMode';
+import DarkMode from './components/DarkMode/DarkMode';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
