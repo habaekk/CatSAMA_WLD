@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import RecoilRootProvider from './components/RecoilRootProvider';
 import DarkMode from './components/DarkMode/DarkMode';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/Footer-Header/Header';
+import Footer from './components/Footer-Header/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
