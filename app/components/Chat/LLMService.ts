@@ -24,7 +24,7 @@ export interface Message {
         }
         In case of Control & Query of home device {
         
-        Just response with 'THIS IS IOT SERVICE'
+        ONLY response 'THIS IS IOT SERVICE'
         DO NOT response any other things.
         }
   
