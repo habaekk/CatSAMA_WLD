@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://IP_ADDRESS:8123';
-const TOKEN = 'YOUR_LONG_LIVED_ACCESS_TOKEN';
+const BASE_URL = process.env.LOCAL_HOST_HA;
+const TOKEN = process.env.LONG_LIVE_THE_TOKEN;
 
 const getHeaders = () => ({
     'Authorization': `Bearer ${TOKEN}`,
@@ -44,9 +44,9 @@ const callService = async (domain: string, service: string, serviceData: object)
 };
 
 // 예제 사용법
-(async () => {
-    const entityId = 'light.study_light';
-    await getState(entityId);
-    await setState(entityId, 'on');
-    await callService('light', 'turn_on', { entity_id: entityId });
-})();
+// (async () => {
+//     const entityId = 'light.study_light';
+//     await getState(entityId);
+//     await setState(entityId, 'on');
+//     await callService('light', 'turn_on', { entity_id: entityId });
+// })();
