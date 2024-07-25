@@ -1,14 +1,15 @@
+// src/api.js
 import axios from 'axios';
 
-const BASE_URL = process.env.LOCAL_HOST_HA;
-const TOKEN = process.env.LONG_LIVE_THE_TOKEN;
+const BASE_URL = process.env.REACT_APP_LOCAL_HOST_HA;
+const TOKEN = process.env.REACT_APP_LONG_LIVE_THE_TOKEN;
 
 const getHeaders = () => ({
     'Authorization': `Bearer ${TOKEN}`,
     'Content-Type': 'application/json',
 });
 
-const getState = async (entityId: string) => {
+export const getState = async (entityId) => {
     try {
         const response = await axios.get(`${BASE_URL}/api/states/${entityId}`, {
             headers: getHeaders(),
@@ -19,7 +20,7 @@ const getState = async (entityId: string) => {
     }
 };
 
-const setState = async (entityId: string, state: string) => {
+export const setState = async (entityId, state) => {
     try {
         const response = await axios.post(`${BASE_URL}/api/states/${entityId}`, {
             state: state
@@ -32,7 +33,7 @@ const setState = async (entityId: string, state: string) => {
     }
 };
 
-const callService = async (domain: string, service: string, serviceData: object) => {
+export const callService = async (domain, service, serviceData) => {
     try {
         const response = await axios.post(`${BASE_URL}/api/services/${domain}/${service}`, serviceData, {
             headers: getHeaders(),
@@ -42,11 +43,3 @@ const callService = async (domain: string, service: string, serviceData: object)
         console.error('Error calling service:', error);
     }
 };
-
-// 예제 사용법
-// (async () => {
-//     const entityId = 'light.study_light';
-//     await getState(entityId);
-//     await setState(entityId, 'on');
-//     await callService('light', 'turn_on', { entity_id: entityId });
-// })();
