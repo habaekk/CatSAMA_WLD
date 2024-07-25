@@ -1,8 +1,8 @@
 // src/api.js
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_LOCAL_HOST_HA;
-const TOKEN = process.env.REACT_APP_LONG_LIVE_THE_TOKEN;
+const BASE_URL = process.env.NEXT_PUBLIC_LOCAL_HOST_HA;
+const TOKEN = process.env.NEXT_PUBLIC_LONG_LIVE_THE_TOKEN;
 
 const getHeaders = () => ({
     'Authorization': `Bearer ${TOKEN}`,
