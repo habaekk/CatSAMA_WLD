@@ -33,6 +33,18 @@ export const setState = async (entityId, state) => {
     }
 };
 
+export const getService = async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/api/services`, {
+            headers: getHeaders(),
+        });
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error getting service:', error);
+    }
+};
+
+
 export const callService = async (domain, service, serviceData) => {
     try {
         const response = await axios.post(`${BASE_URL}/api/services/${domain}/${service}`, serviceData, {

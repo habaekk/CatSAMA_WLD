@@ -3,6 +3,11 @@
 import React from 'react';
 import DarkModeToggle from '../components/DarkMode/DarkModeToggle';
 import FetchStateButton from '../components/FetchStateButton';
+import SetStateButton from '../components/SetStateButton';
+import GetServiceButton from '../components/GetServiceButton';
+import CallServiceButton from '../components/CallServiceButton';
+
+
 
 export default function Settings() {
   const entity = process.env.NEXT_PUBLIC_ENTITY;
@@ -14,6 +19,9 @@ export default function Settings() {
         <div className="flex flex-col space-y-4">
           <DarkModeToggle />
           <FetchStateButton entityId={entity} />
+          <SetStateButton entityId={entity} newState="off" />
+          <GetServiceButton />
+          <CallServiceButton domain="fan" service="toggle" serviceData={{ entity_id: entity }} />
         </div>
       </div>
     </div>
