@@ -1,6 +1,6 @@
 // src/CallServiceButton.js
 import React from 'react';
-import { callService } from './HA_API/api';
+import { callService } from './api';
 
 const CallServiceButton = ({ domain, service, serviceData }) => {
     const handleCallService = async () => {

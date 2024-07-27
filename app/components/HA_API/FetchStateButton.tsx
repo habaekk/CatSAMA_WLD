@@ -1,6 +1,6 @@
 // src/FetchStateButton.js
 import React from 'react';
-import { getState } from './HA_API/api';
+import { getState } from './api';
 
 const FetchStateButton = ({ entityId }) => {
     const handleFetchState = async () => {

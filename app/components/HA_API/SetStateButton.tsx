@@ -1,6 +1,6 @@
 // src/SetStateButton.js
 import React from 'react';
-import { setState } from './HA_API/api';
+import { setState } from './api';
 
 const SetStateButton = ({ entityId, newState }) => {
     const handleSetState = async () => {

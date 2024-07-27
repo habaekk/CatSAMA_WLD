@@ -1,6 +1,6 @@
 // src/FetchStateButton.js
 import React from 'react';
-import { getService } from './HA_API/api';
+import { getService } from './api';
 
 const FetchStateButton = () => {
     const handleFetchState = async () => {

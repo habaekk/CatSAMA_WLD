@@ -2,10 +2,10 @@
 
 import React from 'react';
 import DarkModeToggle from '../components/DarkMode/DarkModeToggle';
-import FetchStateButton from '../components/FetchStateButton';
-import SetStateButton from '../components/SetStateButton';
-import GetServiceButton from '../components/GetServiceButton';
-import CallServiceButton from '../components/CallServiceButton';
+import FetchStateButton from '../components/HA_API/FetchStateButton';
+import SetStateButton from '../components/HA_API/SetStateButton';
+import GetServiceButton from '../components/HA_API/GetServiceButton';
+import CallServiceButton from '../components/HA_API/CallServiceButton';
 
 
 
