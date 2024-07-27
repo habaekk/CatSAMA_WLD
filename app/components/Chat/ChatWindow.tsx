@@ -4,10 +4,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { initialMessages, Message, chat } from './LLMService';
+import { settings, Message, chat } from './LLMService';
 
 const ChatWindow: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>(settings);
   const [loading, setLoading] = useState(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
 
