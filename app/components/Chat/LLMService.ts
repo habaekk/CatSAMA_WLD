@@ -5,7 +5,7 @@ export interface Message {
   content: string;
 }
 
-export const initialMessages: Message[] = [
+export const settings: Message[] = [
   {
     role: 'system',
     content: `
@@ -37,7 +37,7 @@ export const initialMessages: Message[] = [
 export const chat = async (messages: Message[]): Promise<Message> => {
   const body = {
     model: 'Ccat',
-    messages: [...initialMessages, ...messages],
+    messages: [...settings, ...messages],
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {
