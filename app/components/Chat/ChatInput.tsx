@@ -31,14 +31,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="border-t border-gray-300 p-4 dark:border-gray-700 dark:bg-gray-800">
+    <div className="flex items-center border-t border-gray-300 p-4 dark:border-gray-700 dark:bg-gray-800">
       <input
         ref={inputRef}
         type="text"
-        className="w-full p-2 border border-gray-300 rounded-lg dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+        className="flex-grow p-2 border border-gray-300 rounded-lg dark:border-gray-700 dark:bg-gray-700 dark:text-white"
         placeholder="Type your message..."
         onKeyPress={handleKeyPress}
       />
+      <button
+        onClick={handleSend}
+        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg dark:bg-blue-700"
+      >
+        Send
+      </button>
     </div>
   );
 };
