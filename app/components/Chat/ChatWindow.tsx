@@ -1,9 +1,10 @@
+// ChatWindow.tsx
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { chat, initialMessages, Message } from './LLMService';
+import { initialMessages, Message, chat } from './LLMService';
 
 const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -14,6 +15,7 @@ const ChatWindow: React.FC = () => {
     const userMessage: Message = { role: 'user', content: messageContent };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
+
     const botMessage = await chat([...messages, userMessage]);
     setMessages((prevMessages) => [...prevMessages, botMessage]);
     setLoading(false);
