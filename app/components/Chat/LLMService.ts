@@ -1,5 +1,7 @@
 // LLMService.ts
 
+import { parseResponse, ParsedResponse } from './LLMResponseParser';
+
 export interface Message {
   role: 'assistant' | 'user' | 'system';
   content: string;
@@ -66,7 +68,10 @@ export const chat = async (messages: Message[]): Promise<Message> => {
       content += json.message.content;
     }
   }
-  return { role: 'assistant', content: content };
+
+  const parsedResponse: ParsedResponse = parseResponse(content);
+
+  return { role: 'assistant', content: parsedResponse.content };
 };
 
 export const handleSendMessage = async (
