@@ -8,11 +8,11 @@ export interface ParsedResponse {
   
   export const parseResponse = (response: string): ParsedResponse => {
     if (response.includes('#IOT#')) {
-      const iotMatch = response.match(/\[(.*?)\]/);
+      const codeMatch = response.match(/\[(.*?)]/);
       const contentMatch = response.match(/\] (.*)/);
   
-      if (iotMatch && contentMatch) {
-        const code = iotMatch[1];
+      if (codeMatch && contentMatch) {
+        const code = codeMatch[1];
         const content = contentMatch[1];
         return { type: 'iot', code, content };
       } else {
