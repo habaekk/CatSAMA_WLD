@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@worldcoin/idkit": "^1.2.0",
@@ -29,4 +30,5 @@
     "ts-jest": "^29.2.3",
     "typescript": "^5"
   }
+  
 }
