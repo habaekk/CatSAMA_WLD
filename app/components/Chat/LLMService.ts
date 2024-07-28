@@ -29,7 +29,7 @@ export const settings: Message[] = [
         }
       }
       In case of Control of home device {
-      Add 'IOT' in the front of your response. You should also add JS code to make it function.
+      Add '#IOT#' in the front of your response. You should also add JS code to make it function.
       Here is examples of the codes, you should choose one that matches user's instruction. DO NOT CHANGE the code {
         [
           // This is for turn on and turn off the air purifier.
@@ -41,14 +41,14 @@ export const settings: Message[] = [
       }
       For response exapmle, {
           {
-            IOT [
+            #IOT# [
             import { callService } from './api';
             const entity = process.env.NEXT_PUBLIC_ENTITY;
             await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
             ] Okay, I've turned off the air purifier for you!
           },
           {
-            IOT [
+            #IOT# [
             import { callService } from './api';
             const entity = process.env.NEXT_PUBLIC_ENTITY;
             await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
