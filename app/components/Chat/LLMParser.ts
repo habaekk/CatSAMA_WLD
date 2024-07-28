@@ -1,25 +1,25 @@
 // LLMResponseParser.ts
 
 export interface ParsedResponse {
-    type: 'casual' | 'iot' | 'unknown';
+    type: 'casual' | 'iot';
+    code: string | null;
     content: string;
   }
   
   export const parseResponse = (response: string): ParsedResponse => {
-    const casualKeywords = ['catSAMA', 'cute', 'chat'];
-    const iotKeywords = ['THIS IS IOT SERVICE'];
+    if (response.includes('#IOT#')) {
+      const iotMatch = response.match(/\[(.*?)\]/);
+      const contentMatch = response.match(/\] (.*)/);
   
-    const isCasual = casualKeywords.some((keyword) =>
-      response.includes(keyword)
-    );
-    const isIot = iotKeywords.some((keyword) => response.includes(keyword));
-  
-    if (isIot) {
-      return { type: 'iot', content: response };
-    } else if (isCasual) {
-      return { type: 'casual', content: response };
+      if (iotMatch && contentMatch) {
+        const code = iotMatch[1];
+        const content = contentMatch[1];
+        return { type: 'iot', code, content };
+      } else {
+        return { type: 'iot', code: null, content: response.replace('#IOT#', '').trim() };
+      }
     } else {
-      return { type: 'unknown', content: response };
+      return { type: 'casual', code: null, content: response };
     }
   };
   
