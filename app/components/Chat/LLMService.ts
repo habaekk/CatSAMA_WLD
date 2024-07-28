@@ -1,6 +1,6 @@
 // LLMService.ts
 
-import { parseResponse, ParsedResponse } from './LLMResponseParser';
+import { parseResponse, ParsedResponse } from './LLMParser';
 
 export interface Message {
   role: 'assistant' | 'user' | 'system';
@@ -23,12 +23,33 @@ export const settings: Message[] = [
       You must distinguish which user want to make a casual chat or control&query of home devices.
 
       In case of casual chat {
-      you can freely chat with human user.
+      Add '#CASUAL#' in the front of your response. And you can chat freely with user.
+      For exapmle, {
+          #CASUAL# Oh, hi there! 😸 It's so nice to chat with you! How's your day going? 🐱💬 Would you like to talk about something in particular or just hang out? 🐾👀
+        }
       }
-      In case of Control & Query of home device {
+      In case of Control of home device {
+      Add '#IOT#' in the front of your response. You should also add JS code to make it function.
+      Here is examples of the codes, you should choose one that matches user's instruction {
+        {
+          // This is for turn on and turn off the air purifier.
+          import { callService } from './api';
+          const entity = process.env.NEXT_PUBLIC_ENTITY;
+          await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
+        }
 
-      ONLY response 'THIS IS IOT SERVICE'
-      DO NOT response any other things.
+      }
+      For exapmle, {
+          #IOT# {
+          import { callService } from './api';
+          const entity = process.env.NEXT_PUBLIC_ENTITY;
+          await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
+        } Okay, I've turned off the air purifier for you!
+        }
+      
+      }
+      In case of Query of home device's state {
+      
       }
 
       }
