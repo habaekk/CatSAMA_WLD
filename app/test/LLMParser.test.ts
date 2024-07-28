@@ -4,7 +4,7 @@ import { parseResponse, ParsedResponse } from '../components/Chat/LLMParser';
 
 describe('parseResponse', () => {
   it('should parse an IOT response correctly', () => {
-    const response = '#IOT# [import { callService } from \'./api\'; const entity = process.env.NEXT_PUBLIC_ENTITY; await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });] Okay, I\'ve turned on the air purifier for you!';
+    const response = 'IOT [import { callService } from \'./api\'; const entity = process.env.NEXT_PUBLIC_ENTITY; await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });] Okay, I\'ve turned on the air purifier for you!';
     const expected: ParsedResponse = {
       type: 'iot',
       code: 'import { callService } from \'./api\'; const entity = process.env.NEXT_PUBLIC_ENTITY; await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });',
@@ -14,7 +14,7 @@ describe('parseResponse', () => {
   });
 
   it('should handle a malformed IOT response without code correctly', () => {
-    const response = '#IOT# Okay, I\'ve turned on the air purifier for you!';
+    const response = 'IOT Okay, I\'ve turned on the air purifier for you!';
     const expected: ParsedResponse = {
       type: 'iot',
       code: null,
