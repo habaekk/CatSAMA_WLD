@@ -1,6 +1,7 @@
 // LLMService.ts
 
 import { parseResponse, ParsedResponse } from './LLMParser';
+import { executeCode } from './ExecuteCode';
 
 export interface Message {
   role: 'assistant' | 'user' | 'system';
@@ -32,26 +33,19 @@ export const settings: Message[] = [
       Add '#IOT#' in the front of your response. You should also add JS code to make it function.
       Here is examples of the codes, you should choose one that matches user's instruction. DO NOT CHANGE the code {
         [
-          // This is for turn on and turn off the air purifier.
-          import { callService } from './api';
-          const entity = process.env.NEXT_PUBLIC_ENTITY;
-          await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
+          toggleAirPurifier
         ]
 
       }
       For response exapmle, {
           {
             #IOT# [
-            import { callService } from './api';
-            const entity = process.env.NEXT_PUBLIC_ENTITY;
-            await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
+              toggleAirPurifier
             ] Okay, I've turned off the air purifier for you!
           },
           {
             #IOT# [
-            import { callService } from './api';
-            const entity = process.env.NEXT_PUBLIC_ENTITY;
-            await callService(domain="fan" service="toggle" serviceData={{ entity_id: entity });
+              toggleAirPurifier
           ] Okay, I've turned on the air purifier for you!
           }
 
@@ -105,7 +99,10 @@ export const chat = async (messages: Message[]): Promise<Message> => {
   const parsedResponse: ParsedResponse = parseResponse(content);
 
   console.log('Response:', parsedResponse.content); // 콘솔에 response 값 출력
-
+  
+  if ( parsedResponse.code ) { 
+    await executeCode(parsedResponse.code);
+  }
 
   return { role: 'assistant', content: parsedResponse.content };
 };
