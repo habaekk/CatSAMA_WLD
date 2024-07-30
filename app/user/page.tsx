@@ -61,16 +61,6 @@ export default function UserPage() {
 
       {/* 월드코인으로 로그인 섹션 */}
       <div className="flex flex-col items-center">
-        <div className="flex items-center mb-4">
-          <Image
-            src="/WLD.png" // 이미지 파일 경로
-            alt="WLD Logo"
-            width={50}
-            height={50}
-            className="mr-2"
-          />
-          <p className="text-2xl font-bold">월드코인 앱을 이용하여 로그인</p>
-        </div>
 
         <IDKitWidget
           app_id={process.env.NEXT_PUBLIC_APP_ID} // 환경 변수에서 가져온 app_id
@@ -81,11 +71,22 @@ export default function UserPage() {
         >
           {({ open }) => (
             <button 
-              onClick={open} 
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={open} 
+            className="bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
             >
-              World ID 로 로그인
+            <div className="flex items-center">
+              <Image
+                src="/WLD.svg" // 이미지 파일 경로
+                alt="WLD Logo"
+                width={40}
+                height={40}
+                className="mr-1"
+              />
+              <p className="text-lg font-bold mr-4">월드코인 앱을 이용하여 로그인</p>
+            </div>
             </button>
+          
+          
           )}
         </IDKitWidget>
       </div>
