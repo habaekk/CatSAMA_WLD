@@ -21,7 +21,6 @@ export default function UserPage() {
 
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-6 relative dark:text-white bg-gray-100 dark:bg-gray-900">
-      
       {/* 큰 글씨로 CatSAMA */}
       <h1 className="text-5xl font-extrabold mb-8">CatSAMA</h1>
 
@@ -48,15 +47,15 @@ export default function UserPage() {
         로그인
       </button>
 
-      {/* 가입하기 */}
-      <a href="#" className="text-blue-500 hover:underline mb-6">
-        가입하기
-      </a>
+      {/* 아이디가 없으세요? 가입하기 */}
+      <div className="text-white mb-6">
+        아이디가 없으세요? <a href="#" className="text-blue-500 hover:underline mb-6">가입하기</a>
+      </div>
 
       {/* 디바이드 줄 */}
       <div className="flex items-center w-full max-w-md my-4">
         <hr className="w-full border-gray-300 dark:border-gray-700" />
-        <span className="mx-4 text-gray-500 dark:text-gray-400">또는</span>
+        <span className="mx-4 text-gray-500 dark:text-gray-400 whitespace-nowrap">또는</span>
         <hr className="w-full border-gray-300 dark:border-gray-700" />
       </div>
 
