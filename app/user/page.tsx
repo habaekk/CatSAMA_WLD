@@ -49,7 +49,7 @@ export default function UserPage() {
         </button>
 
         {/* 아이디가 없으세요? 가입하기 */}
-        <div className="text-white mb-6">
+        <div className="mb-6">
           아이디가 없으세요? <a href="#" className="text-blue-500 hover:underline mb-6">가입하기</a>
         </div>
 
