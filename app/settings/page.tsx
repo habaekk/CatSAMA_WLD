@@ -1,3 +1,4 @@
+// Settings.js
 'use client';
 
 import React from 'react';
@@ -6,8 +7,6 @@ import FetchStateButton from '../components/HA_API/FetchStateButton';
 import SetStateButton from '../components/HA_API/SetStateButton';
 import GetServiceButton from '../components/HA_API/GetServiceButton';
 import CallServiceButton from '../components/HA_API/CallServiceButton';
-
-
 
 export default function Settings() {
   const entity = process.env.NEXT_PUBLIC_ENTITY;

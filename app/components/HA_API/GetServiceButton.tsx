@@ -8,7 +8,9 @@ const FetchStateButton = () => {
     };
 
     return (
-        <button onClick={handleFetchState}>Get Service</button>
+        <button onClick={handleFetchState}
+        className="w-full max-w-md bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+        >Get Service</button>
     );
 };
 
