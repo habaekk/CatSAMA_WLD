@@ -6,18 +6,22 @@ import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import { settings, Message, chat } from './LLMService';
 
+interface TimestampedMessage extends Message {
+  timestamp: string;
+}
+
 const ChatWindow: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>(settings);
+  const [messages, setMessages] = useState<TimestampedMessage[]>(settings.map(msg => ({ ...msg, timestamp: new Date().toLocaleTimeString() })));
   const [loading, setLoading] = useState(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = async (messageContent: string) => {
-    const userMessage: Message = { role: 'user', content: messageContent };
+    const userMessage: TimestampedMessage = { role: 'user', content: messageContent, timestamp: new Date().toLocaleTimeString() };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
 
     const botMessage = await chat([...messages, userMessage]);
-    setMessages((prevMessages) => [...prevMessages, botMessage]);
+    setMessages((prevMessages) => [...prevMessages, { ...botMessage, timestamp: new Date().toLocaleTimeString() }]);
     setLoading(false);
   };
 
@@ -37,7 +41,7 @@ const ChatWindow: React.FC = () => {
               key={index}
               message={msg.content}
               sender={msg.role === 'user' ? 'You' : 'Assistant'}
-              timestamp={new Date().toLocaleTimeString()}
+              timestamp={msg.timestamp}
               isOwnMessage={msg.role === 'user'}
             />
           ))}

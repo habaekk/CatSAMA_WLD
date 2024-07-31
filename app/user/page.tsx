@@ -89,9 +89,9 @@ export default function UserPage() {
                   <Image
                     src="/WLD.svg" // 이미지 파일 경로
                     alt="WLD Logo"
-                    width={40}
-                    height={40}
-                    className="mr-1"
+                    width={30}
+                    height={30}
+                    className="mr-2 mb-1"
                   />
                   <p className="text-lg font-bold mr-4">월드코인 앱을 이용하여 로그인</p>
                 </div>
