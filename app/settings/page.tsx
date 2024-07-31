@@ -1,4 +1,3 @@
-// Settings.js
 'use client';
 
 import React from 'react';
@@ -12,9 +11,9 @@ export default function Settings() {
   const entity = process.env.NEXT_PUBLIC_ENTITY;
 
   return (
-    <div className="main-content flex min-h-screen flex-col items-center justify-start p-24 relative text-black dark:text-white">
-      <div className="w-full mt-20">
-        <h2 className="text-5xl font-bold mb-4">Settings</h2>
+    <div className="main-content flex min-h-screen flex-col items-center justify-start p-6 relative text-black dark:text-white">
+      <div className="w-full max-w-md mt-20">
+        <h2 className="text-5xl font-bold mb-4 text-center">Settings</h2>
         <div className="flex flex-col space-y-4">
           <DarkModeToggle />
           <FetchStateButton entityId={entity} />
