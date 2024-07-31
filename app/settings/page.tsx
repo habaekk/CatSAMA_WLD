@@ -12,7 +12,7 @@ export default function Settings() {
 
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-start p-6 relative text-black dark:text-white">
-      <div className="w-full max-w-md mt-20">
+      <div className="w-full max-w-md mt-40">
         <h2 className="text-5xl font-bold mb-4 text-center">Settings</h2>
         <div className="flex flex-col space-y-4">
           <DarkModeToggle />
