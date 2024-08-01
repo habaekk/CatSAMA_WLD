@@ -28,7 +28,7 @@ export default function Header() {
       </div>
       <Link href="/user" className="cursor-pointer">
         <Image
-          src="/user.png" // 사용자 아이콘 이미지 파일 경로
+          src="/user.svg" // 사용자 아이콘 이미지 파일 경로
           alt="User Icon"
           width={40}
           height={40}
