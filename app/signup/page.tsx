@@ -43,7 +43,7 @@ export default function Signup() {
         <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-md">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              이메일
+              이메일 <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -56,7 +56,7 @@ export default function Signup() {
           </div>
           <div>
             <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              사용자명
+              사용자명 <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -69,7 +69,7 @@ export default function Signup() {
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              비밀번호
+              비밀번호 <span className="text-red-500">*</span>
             </label>
             <input
               type="password"
@@ -82,7 +82,7 @@ export default function Signup() {
           </div>
           <div>
             <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              비밀번호 확인
+              비밀번호 확인 <span className="text-red-500">*</span>
             </label>
             <input
               type="password"
