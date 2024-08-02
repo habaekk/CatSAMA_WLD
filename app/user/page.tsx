@@ -61,7 +61,7 @@ export default function UserPage() {
 
         {/* 아이디가 없으세요? 가입하기 */}
         <div className="mb-6">
-          아이디가 없으세요? <a href="#" className="text-blue-500 hover:underline mb-6">가입하기</a>
+          아이디가 없으세요? <a href="/signup" className="text-blue-500 hover:underline mb-6">가입하기</a>
         </div>
 
         {/* 디바이드 줄 */}
