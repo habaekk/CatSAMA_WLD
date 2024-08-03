@@ -17,12 +17,13 @@ function handleVerify(result) {
 
 export default function UserPage() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function handleLogin() {
     // 로그인 버튼 클릭 시 실행되는 코드
-    console.log('로그인 시도:', { email });
+    console.log('로그인 시도:', { email, password });
     // 여기서 실제 로그인 로직을 구현하거나 서버에 요청을 보낼 수 있습니다.
-    if (email === 'test@example.com') {
+    if (email === 'test@example.com' && password === 'password') {
       window.alert('로그인 성공!');
     } else {
       window.alert('로그인 실패: 이메일이나 비밀번호를 확인하세요.');
@@ -71,19 +72,25 @@ export default function UserPage() {
           <hr className="w-full border-gray-300 dark:border-gray-700" />
         </div>
 
-        {/* 이메일 입력 필드 */}
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full max-w-md p-4 mb-4 text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded"
-        />
-
-        {/* 로그인 버튼 */}
-        <button onClick={handleLogin} className="w-full max-w-md bg-blue-500 text-white p-4 rounded hover:bg-blue-600 mb-4">
-          로그인
-        </button>
+        {/* 이메일 입력 필드 및 로그인 버튼 */}
+        <div className="w-full max-w-md flex items-center mb-4">
+          <input
+            type="email"
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="flex-grow p-4 text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md"
+          />
+          <button 
+            onClick={handleLogin} 
+            className="bg-blue-500 text-white p-4 rounded-md hover:bg-blue-600 flex items-center justify-center ml-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
