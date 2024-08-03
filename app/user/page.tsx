@@ -17,13 +17,12 @@ function handleVerify(result) {
 
 export default function UserPage() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   function handleLogin() {
     // 로그인 버튼 클릭 시 실행되는 코드
-    console.log('로그인 시도:', { email, password });
+    console.log('로그인 시도:', { email });
     // 여기서 실제 로그인 로직을 구현하거나 서버에 요청을 보낼 수 있습니다.
-    if (email === 'test@example.com' && password === 'password') {
+    if (email === 'test@example.com') {
       window.alert('로그인 성공!');
     } else {
       window.alert('로그인 실패: 이메일이나 비밀번호를 확인하세요.');
