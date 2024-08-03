@@ -76,7 +76,7 @@ export default function UserPage() {
         <div className="w-full max-w-md flex items-center mb-4">
           <input
             type="email"
-            placeholder="이메일"
+            placeholder="이메일*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="flex-grow p-4 text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md"
