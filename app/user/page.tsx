@@ -39,6 +39,12 @@ export default function UserPage() {
     }
   }
 
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  }
+
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-6 relative dark:text-white">
       <div className="w-full h-[80vh] rounded-lg bg-white dark:bg-gray-800 p-6 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -88,6 +94,7 @@ export default function UserPage() {
             placeholder="이메일*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyPress={handleKeyPress}
             className={`flex-grow p-4 text-black dark:text-white bg-white dark:bg-gray-800 border ${emailError ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md`}
           />
           <button 
