@@ -18,15 +18,24 @@ function handleVerify(result) {
 export default function UserPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState(false);
 
   function handleLogin() {
     // 로그인 버튼 클릭 시 실행되는 코드
     console.log('로그인 시도:', { email, password });
-    // 여기서 실제 로그인 로직을 구현하거나 서버에 요청을 보낼 수 있습니다.
-    if (email === 'test@example.com' && password === 'password') {
-      window.alert('로그인 성공!');
+
+    // 이메일 유효성 검사
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError(true);
     } else {
-      window.alert('로그인 실패: 이메일이나 비밀번호를 확인하세요.');
+      setEmailError(false);
+      // 여기서 실제 로그인 로직을 구현하거나 서버에 요청을 보낼 수 있습니다.
+      if (email === 'test@example.com' && password === 'password') {
+        window.alert('로그인 성공!');
+      } else {
+        window.alert('로그인 실패: 이메일이나 비밀번호를 확인하세요.');
+      }
     }
   }
 
@@ -73,13 +82,13 @@ export default function UserPage() {
         </div>
 
         {/* 이메일 입력 필드 및 로그인 버튼 */}
-        <div className="w-full max-w-md flex items-center mb-4">
+        <div className="w-full max-w-md flex items-center mb-2">
           <input
             type="email"
             placeholder="이메일*"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-grow p-4 text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md"
+            className={`flex-grow p-4 text-black dark:text-white bg-white dark:bg-gray-800 border ${emailError ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md`}
           />
           <button 
             onClick={handleLogin} 
@@ -91,6 +100,7 @@ export default function UserPage() {
             </svg>
           </button>
         </div>
+        {emailError && <p className="text-red-500 w-full max-w-md text-left">❗유효하지 않은 이메일.</p>}
       </div>
     </div>
   );
