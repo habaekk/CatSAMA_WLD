@@ -47,7 +47,7 @@ export default function UserPage() {
 
   return (
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-6 relative dark:text-white">
-      <div className="w-full h-[80vh] rounded-lg bg-white dark:bg-gray-800 p-6 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
+      <div className="w-full h-[80vh] rounded-lg bg-gray-100 p-6 flex flex-col items-center justify-center dark:bg-gray-900">
         {/* 큰 글씨로 CatSAMA */}
         <h1 className="text-5xl font-extrabold mb-8">CatSAMA</h1>
 
