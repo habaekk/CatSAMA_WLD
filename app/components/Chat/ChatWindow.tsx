@@ -32,8 +32,8 @@ const ChatWindow: React.FC = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-[80vh] max-w w-full border border-gray-300 rounded-lg overflow-hidden dark:border-gray-700">
-      <div className="flex-grow p-4 overflow-auto dark:bg-gray-800" ref={chatWindowRef}>
+    <div className="flex flex-col h-[80vh] max-w w-full border border-gray-300 rounded-lg overflow-hidden bg-gray-100 dark:border-gray-700 dark:bg-gray-800">
+      <div className="flex-grow p-4 overflow-auto" ref={chatWindowRef}>
         {messages
           .filter((msg) => msg.role !== 'system')
           .map((msg, index) => (
