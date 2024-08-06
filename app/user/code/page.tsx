@@ -38,7 +38,7 @@ export default function Code() {
     <div className="main-content flex min-h-screen flex-col items-center justify-center p-6 relative dark:text-white">
       <div className="w-full h-[80vh] rounded-lg bg-white dark:bg-gray-800 p-6 flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
         {/* 큰 글씨로 CatSAMA */}
-        <h1 className="text-4xl font-extrabold mb-6">코드를 입력하여 로그인</h1>
+        <h1 className="text-4xl font-extrabold mb-8">코드를 입력하여 로그인</h1>
 
         <p className="mb-4 text-m">이메일로 보내진 6자리 코드를 입력해주세요.</p>
 
