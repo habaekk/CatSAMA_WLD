@@ -1,13 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function code() {
+export default function Code() {
   const [verificationCode, setVerificationCode] = useState('');
   const [codeError, setCodeError] = useState(false);
 
+  useEffect(() => {
+    // 인증 코드 길이가 6자리인 경우 자동으로 제출 시도
+    if (verificationCode.length === 6) {
+      handleCodeSubmit();
+    }
+  }, [verificationCode]);
+
   function handleCodeSubmit() {
-    // 인증 코드 제출 버튼 클릭 시 실행되는 코드
     console.log('코드 제출 시도:', { verificationCode });
 
     // 인증 코드 유효성 검사 (여기서는 간단한 예로 6자리 숫자인지 확인)
