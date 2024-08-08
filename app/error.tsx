@@ -1,4 +1,6 @@
 // app/error.js
+'use client';
+
 import Link from 'next/link';
 
 export default function Error({ error, reset }) {
