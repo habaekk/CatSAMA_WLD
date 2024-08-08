@@ -52,7 +52,7 @@ export default function UserPage() {
         <h1 className="text-5xl font-extrabold mb-8">CatSAMA</h1>
 
         {/* 월드코인으로 로그인 섹션 */}
-        <div className="w-full max-w-md flex flex-col items-center mb-4">
+        <div className="w-full max-w-md flex flex-col items-center mb-4 ">
           <IDKitWidget
             app_id={process.env.NEXT_PUBLIC_APP_ID} // 환경 변수에서 가져온 app_id
             action={process.env.NEXT_PUBLIC_ACTION_ID} // 환경 변수에서 가져온 action id
