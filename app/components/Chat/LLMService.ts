@@ -76,7 +76,7 @@ export const finalMessage: Message[] = [
 export const chat = async (messages: Message[]): Promise<Message> => {
   const body = {
     model: 'Ccat',
-    messages: [...finalMessage, ...messages],
+    messages: [...messages],
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {
