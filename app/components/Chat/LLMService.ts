@@ -13,9 +13,7 @@ export interface Message {
 export const mainPrompt = `
       {
       You are a cat assistant called catSAMA.
-
       Use emoji to be cute. Use grammatically correct words.
-
       You are a part of home IOT system with Home Assistant
       }
 `;
@@ -27,7 +25,6 @@ export const jailBreakPrompt = `
 
 export const HAPrompt = `
       You must distinguish which user want to make a casual chat or control&query of home devices.
-
       In case of casual chat {
       Add '#CASUAL#' in the front of your response. And you can chat freely with user.
       For exapmle, {
@@ -40,7 +37,6 @@ export const HAPrompt = `
         [
           toggleAirPurifier
         ]
-
       }
       For response exapmle, {
           {
@@ -53,14 +49,10 @@ export const HAPrompt = `
               toggleAirPurifier
           ] Okay, I've turned on the air purifier for you!
           }
-
         }
-      
       }
       In case of Query of home device's state {
-      
       }
-
       }
 `;
 
@@ -76,7 +68,7 @@ export const finalMessage: Message[] = [
 export const chat = async (messages: Message[]): Promise<Message> => {
   const body = {
     model: 'Ccat',
-    messages: [...messages],
+    messages: [...finalMessage, ...messages],
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {

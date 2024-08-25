@@ -20,7 +20,7 @@ const ChatWindow: React.FC = () => {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
 
-    const botMessage = await chat([...messages, userMessage]);
+    const botMessage = await chat([userMessage]);
     setMessages((prevMessages) => [...prevMessages, { ...botMessage, timestamp: new Date().toLocaleTimeString() }]);
     setLoading(false);
   };
