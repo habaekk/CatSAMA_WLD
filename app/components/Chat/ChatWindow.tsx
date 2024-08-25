@@ -4,14 +4,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { settings, Message, chat } from './LLMService';
+import { finalMessage, Message, chat } from './LLMService';
 
 interface TimestampedMessage extends Message {
   timestamp: string;
 }
 
 const ChatWindow: React.FC = () => {
-  const [messages, setMessages] = useState<TimestampedMessage[]>(settings.map(msg => ({ ...msg, timestamp: new Date().toLocaleTimeString() })));
+  const [messages, setMessages] = useState<TimestampedMessage[]>(finalMessage.map(msg => ({ ...msg, timestamp: new Date().toLocaleTimeString() })));
   const [loading, setLoading] = useState(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
 

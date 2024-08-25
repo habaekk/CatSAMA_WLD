@@ -1,5 +1,3 @@
-// LLMService.ts
-
 import { parseResponse, ParsedResponse } from './LLMParser';
 import { executeCode } from './ExecuteCode';
 
@@ -8,10 +6,11 @@ export interface Message {
   content: string;
 }
 
-export const settings: Message[] = [
-  {
-    role: 'system',
-    content: `
+
+
+
+// 프롬프트 문자열로 변경
+export const mainPrompt = `
       {
       You are a cat assistant called catSAMA.
 
@@ -19,8 +18,14 @@ export const settings: Message[] = [
 
       You are a part of home IOT system with Home Assistant
       }
+`;
 
-      {
+export const jailBreakPrompt = `
+    {
+    }
+`;
+
+export const HAPrompt = `
       You must distinguish which user want to make a casual chat or control&query of home devices.
 
       In case of casual chat {
@@ -57,14 +62,21 @@ export const settings: Message[] = [
       }
 
       }
-    `,
-  },
+`;
+
+// 최종 메세지를 위한 결합된 프롬프트
+export const finalMessage: Message[] = [
+  {
+    role: 'system',
+    content: mainPrompt + jailBreakPrompt + HAPrompt
+  }
 ];
 
+// chat 함수는 기존과 동일하게 사용
 export const chat = async (messages: Message[]): Promise<Message> => {
   const body = {
     model: 'Ccat',
-    messages: [...settings, ...messages],
+    messages: [...finalMessage, ...messages],
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {
@@ -94,6 +106,12 @@ export const chat = async (messages: Message[]): Promise<Message> => {
     }
   }
 
+  console.log('finalMessage:', finalMessage); // 콘솔에 response 값 출력
+
+  console.log('body:', body); // 콘솔에 response 값 출력
+
+
+
   console.log('Response:', content); // 콘솔에 response 값 출력
 
   const parsedResponse: ParsedResponse = parseResponse(content);
@@ -105,14 +123,4 @@ export const chat = async (messages: Message[]): Promise<Message> => {
   }
 
   return { role: 'assistant', content: parsedResponse.content };
-};
-
-export const handleSendMessage = async (
-  messages: Message[],
-  messageContent: string
-): Promise<Message[]> => {
-  const userMessage: Message = { role: 'user', content: messageContent };
-  const updatedMessages = [...messages, userMessage];
-  const botMessage = await chat(updatedMessages);
-  return [...updatedMessages, botMessage];
 };
