@@ -73,7 +73,7 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
   if (isIotRelated === 1) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
     console.log("THIS IS IOT")
-    return await chat(messages);
+    return await IOTchat(messages);
   } else {
     // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
     console.log("THIS IS NOT IOT")
@@ -120,7 +120,7 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
 };
 
 // chat 함수는 기존과 동일하게 사용
-export const chat = async (messages: Message[]): Promise<Message> => {
+export const IOTchat = async (messages: Message[]): Promise<Message> => {
   const body = {
     model: 'Ccat',
     messages: [...finalMessage, ...messages],
