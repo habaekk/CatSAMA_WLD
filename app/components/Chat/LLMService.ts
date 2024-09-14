@@ -98,17 +98,7 @@ export const chat = async (messages: Message[]): Promise<Message> => {
     }
   }
 
-  console.log('finalMessage:', finalMessage); // 콘솔에 response 값 출력
-
-  console.log('body:', body); // 콘솔에 response 값 출력
-
-
-
-  console.log('Response:', content); // 콘솔에 response 값 출력
-
   const parsedResponse: ParsedResponse = parseResponse(content);
-
-  console.log('Response:', parsedResponse.content); // 콘솔에 response 값 출력
   
   if ( parsedResponse.code ) { 
     await executeCode(parsedResponse.code);
