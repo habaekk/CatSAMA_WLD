@@ -1,4 +1,4 @@
-export async function llmCondition(inputString) {
+async function llmCondition(inputString) {
     // LLM에게 요청할 프롬프트 구성
     const prompt = `
     You are an assistant that only replies with '1' or '0'.
@@ -62,9 +62,4 @@ export async function llmCondition(inputString) {
     }
   }
   
-  // 예시 사용법:
-  (async () => {
-    const result = await llmCondition('The sky is blue. Is this sentence true?');
-    console.log('Result:', result); // 1 또는 0 출력
-  })();
-  
+  module.exports = llmCondition;
