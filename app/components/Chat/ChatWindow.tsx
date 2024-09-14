@@ -4,7 +4,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { finalMessage, Message, chat } from './LLMService';
+import { finalMessage, Message, processUserMessage } from './LLMService';
 
 interface TimestampedMessage extends Message {
   timestamp: string;
@@ -20,7 +20,7 @@ const ChatWindow: React.FC = () => {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
 
-    const botMessage = await chat([userMessage]);
+    const botMessage = await processUserMessage([userMessage]);
     setMessages((prevMessages) => [...prevMessages, { ...botMessage, timestamp: new Date().toLocaleTimeString() }]);
     setLoading(false);
   };

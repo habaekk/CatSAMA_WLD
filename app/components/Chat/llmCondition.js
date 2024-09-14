@@ -2,7 +2,7 @@ async function llmCondition(inputString) {
     // LLM에게 요청할 프롬프트 구성
     const prompt = `
     You are an assistant that only replies with '1' or '0'.
-    If the user's statement is true, reply with '1'. If it is false, reply with '0'.
+    If the user's question is true, reply with '1'. If it is false, reply with '0'.
     Do not provide any additional text or explanation.
     
     User: "${inputString}"

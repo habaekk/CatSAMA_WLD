@@ -1,13 +1,12 @@
 import { parseResponse, ParsedResponse } from './LLMParser';
 import { executeCode } from './ExecuteCode';
 
+const llmCondition = require('./llmCondition');
+
 export interface Message {
   role: 'assistant' | 'user' | 'system';
   content: string;
 }
-
-
-
 
 // 프롬프트 문자열로 변경
 export const mainPrompt = `
@@ -63,6 +62,59 @@ export const finalMessage: Message[] = [
     content: mainPrompt + jailBreakPrompt + HAPrompt
   }
 ];
+
+export const processUserMessage = async (messages: Message[]): Promise<Message> => {
+  const userMessage = messages[messages.length - 1]?.content; // 마지막 메세지가 사용자 메세지
+  const isIotRelated = await llmCondition('user message: {' + userMessage + '}' +' Is this question related to control or query of home devices?');
+
+  if (isIotRelated === 1) {
+    // IoT 관련 질문인 경우 기존 chat 기능 수행
+    console.log("THIS IS IOT")
+    return await chat(messages);
+  } else {
+    // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
+    console.log("THIS IS NOT IOT")
+    const body = {
+      model: 'Ccat',
+      messages: [
+        {
+          role: 'system',
+          content: mainPrompt
+        },
+        ...messages
+      ],
+    };
+
+    const response = await fetch('http://localhost:11434/api/chat', {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const reader = response.body?.getReader();
+    if (!reader) {
+      throw new Error('Failed to read response body');
+    }
+
+    let content = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      const rawjson = new TextDecoder().decode(value);
+      const json = JSON.parse(rawjson);
+
+      if (json.done === false) {
+        content += json.message.content;
+      }
+    }
+
+    return { role: 'assistant', content };
+  }
+};
 
 // chat 함수는 기존과 동일하게 사용
 export const chat = async (messages: Message[]): Promise<Message> => {
