@@ -11,19 +11,29 @@ interface TimestampedMessage extends Message {
 }
 
 const ChatWindow: React.FC = () => {
-  const [messages, setMessages] = useState<TimestampedMessage[]>(finalMessage.map(msg => ({ ...msg, timestamp: new Date().toLocaleTimeString() })));
+  const [messages, setMessages] = useState<TimestampedMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const chatWindowRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = async (messageContent: string) => {
-    const userMessage: TimestampedMessage = { role: 'user', content: messageContent, timestamp: new Date().toLocaleTimeString() };
+    // 유저 메시지를 생성
+    const userMessage: TimestampedMessage = { 
+      role: 'user', 
+      content: messageContent, 
+      timestamp: new Date().toLocaleTimeString() 
+    };
+
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setLoading(true);
 
-    const botMessage = await processUserMessage([userMessage]);
+    const updatedMessages = [...messages, userMessage];
+
+    const botMessage = await processUserMessage(updatedMessages);
+
     setMessages((prevMessages) => [...prevMessages, { ...botMessage, timestamp: new Date().toLocaleTimeString() }]);
     setLoading(false);
-  };
+};
+
 
   useEffect(() => {
     if (chatWindowRef.current) {

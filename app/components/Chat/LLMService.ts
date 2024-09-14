@@ -64,8 +64,11 @@ export const finalMessage: Message[] = [
 ];
 
 export const processUserMessage = async (messages: Message[]): Promise<Message> => {
+  console.log(messages)
+
   const userMessage = messages[messages.length - 1]?.content; // 마지막 메세지가 사용자 메세지
-  const isIotRelated = await llmCondition('user message: {' + userMessage + '}' +' Is this question related to control or query of home devices?');
+  console.log(userMessage)
+  const isIotRelated = await llmCondition(userMessage);
 
   if (isIotRelated === 1) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
