@@ -1,24 +1,22 @@
-// llmFunction.js
-
-async function llmCondition(inputString) {
-    // Construct the prompt to instruct the LLM to respond only with '1' or '0'
+export async function llmCondition(inputString) {
+    // LLM에게 요청할 프롬프트 구성
     const prompt = `
-  You are an assistant that only replies with '1' or '0'.
-  If the user's statement is true, reply with '1'. If it is false, reply with '0'.
-  Do not provide any additional text or explanation.
+    You are an assistant that only replies with '1' or '0'.
+    If the user's statement is true, reply with '1'. If it is false, reply with '0'.
+    Do not provide any additional text or explanation.
+    
+    User: "${inputString}"
+    Assistant:
+    `;
   
-  User: "${inputString}"
-  Assistant:
-  `;
-  
-    // Prepare the request body for the LLM API
+    // 요청 본문 구성
     const body = {
-      model: 'llama3', // Replace with your actual model name
+      model: 'llama3', // 실제 사용하는 모델 이름으로 수정 필요
       messages: [{ role: 'system', content: prompt }],
     };
   
     try {
-      // Send the prompt to the local LLM API
+      // 로컬 LLM API에 요청 보내기
       const response = await fetch('http://localhost:11434/api/chat', {
         method: 'POST',
         body: JSON.stringify(body),
@@ -27,7 +25,7 @@ async function llmCondition(inputString) {
         },
       });
   
-      // Read the response stream from the LLM
+      // 응답 처리
       const reader = response.body?.getReader();
       if (!reader) {
         throw new Error('Failed to read response body');
@@ -36,25 +34,27 @@ async function llmCondition(inputString) {
       let content = '';
       const decoder = new TextDecoder();
   
-      // Continuously read chunks from the response stream
       while (true) {
         const { done, value } = await reader.read();
-        if (done) {
-          break;
-        }
+        if (done) break;
+  
+        // 스트림 데이터를 읽어서 내용 축적
         const rawJson = decoder.decode(value);
         const json = JSON.parse(rawJson);
   
-        // Accumulate the content from the LLM's response
         if (json.done === false) {
           content += json.message.content;
         }
       }
   
-      // Convert the LLM's response to an integer (1 or 0)
+      // 받은 응답을 정수로 변환
       const result = parseInt(content.trim(), 10);
   
-      // Return the integer value
+      // 1 또는 0이 아닌 응답에 대한 처리
+      if (isNaN(result)) {
+        throw new Error('Unexpected response format');
+      }
+  
       return result;
     } catch (error) {
       console.error('Error:', error);
@@ -62,9 +62,9 @@ async function llmCondition(inputString) {
     }
   }
   
-  // Example usage:
+  // 예시 사용법:
   (async () => {
     const result = await llmCondition('The sky is blue. Is this sentence true?');
-    console.log('Result:', result); // Should output 1 if true, 0 if false
+    console.log('Result:', result); // 1 또는 0 출력
   })();
   
