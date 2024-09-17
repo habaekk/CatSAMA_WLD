@@ -11,19 +11,19 @@ export interface Message {
 }
 
 export const processUserMessage = async (messages: Message[]): Promise<Message> => {
-  console.log(messages)
+  // console.log(messages)
 
   const userMessage = messages[messages.length - 1]?.content; // 마지막 메세지가 사용자 메세지
-  console.log(userMessage)
+  // console.log(userMessage)
   const isIotRelated = await llmCondition(userMessage);
 
   if (isIotRelated === 1) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
-    console.log("THIS IS IOT")
+    // console.log("THIS IS IOT")
     return await chat(messages, 'Ccat', IOTPrompt);
   } else {
     // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
-    console.log("THIS IS NOT IOT")
+    // console.log("THIS IS NOT IOT")
     return await chat(messages, 'Ccat', casualPrompt);
   }
 };
