@@ -10,7 +10,6 @@ export interface Message {
   content: string;
 }
 
-
 export const processUserMessage = async (messages: Message[]): Promise<Message> => {
   console.log(messages)
 
@@ -31,7 +30,7 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
 
 // chat 함수 리팩터
 const chat = async (messages: Message[], _model: string, _prompt: string): Promise<Message> => {
-  const finalMessage: Message[] = [
+  const prompt: Message[] = [
     {
       role: 'system',
       content: _prompt
@@ -40,7 +39,7 @@ const chat = async (messages: Message[], _model: string, _prompt: string): Promi
   
   const body = {
     model: _model,
-    messages: [...finalMessage, ...messages]
+    messages: [...prompt, ...messages]
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {
