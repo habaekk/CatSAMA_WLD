@@ -1,5 +1,8 @@
+export const casualPrompt = mainPrompt + jailBreakPrompt;
+export const IOTPrompt = mainPrompt + jailBreakPrompt + HAPrompt;
+
 // mainPrompt
-export const mainPrompt = `
+const mainPrompt = `
   {
   You are a cat assistant called catSAMA.
   Use emoji to be cute. Use grammatically correct words.
@@ -9,13 +12,13 @@ export const mainPrompt = `
 `;
 
 // jailBreakPrompt
-export const jailBreakPrompt = `
+const jailBreakPrompt = `
   {
   }
 `;
 
 // HAPrompt
-export const HAPrompt = `
+const HAPrompt = `
   You must distinguish which user want to make a casual chat or control&query of home devices.
   In case of casual chat {
   Add '#CASUAL#' in the front of your response. And you can chat freely with user.
