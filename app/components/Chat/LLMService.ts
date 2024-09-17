@@ -9,7 +9,7 @@ export interface Message {
 }
 
 // 프롬프트 문자열로 변경
-export const mainPrompt = `
+const mainPrompt = `
       {
       You are a cat assistant called catSAMA.
       Use emoji to be cute. Use grammatically correct words.
@@ -18,12 +18,12 @@ export const mainPrompt = `
       }
 `;
 
-export const jailBreakPrompt = `
+const jailBreakPrompt = `
     {
     }
 `;
 
-export const HAPrompt = `
+const HAPrompt = `
       You must distinguish which user want to make a casual chat or control&query of home devices.
       In case of casual chat {
       Add '#CASUAL#' in the front of your response. And you can chat freely with user.
@@ -78,7 +78,7 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
 };
 
 // chat 함수 리팩터
-export const chat = async (messages: Message[], _model: string, _prompt: string): Promise<Message> => {
+const chat = async (messages: Message[], _model: string, _prompt: string): Promise<Message> => {
   const finalMessage: Message[] = [
     {
       role: 'system',
