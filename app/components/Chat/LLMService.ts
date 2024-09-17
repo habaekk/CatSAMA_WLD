@@ -13,7 +13,8 @@ export const mainPrompt = `
       {
       You are a cat assistant called catSAMA.
       Use emoji to be cute. Use grammatically correct words.
-      You are a part of home IOT system with Home Assistant
+      You are a part of home IOT system with Home Assistant.
+      Refer to the conversation log and respond to the user's last chat.
       }
 `;
 
@@ -56,12 +57,7 @@ export const HAPrompt = `
 `;
 
 // 최종 메세지를 위한 결합된 프롬프트
-export const finalMessage: Message[] = [
-  {
-    role: 'system',
-    content: mainPrompt + jailBreakPrompt + HAPrompt
-  }
-];
+
 
 export const processUserMessage = async (messages: Message[]): Promise<Message> => {
   console.log(messages)
@@ -73,57 +69,26 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
   if (isIotRelated === 1) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
     console.log("THIS IS IOT")
-    return await IOTchat(messages);
+    return await chat(messages, 'Ccat', mainPrompt+jailBreakPrompt+HAPrompt);
   } else {
     // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
     console.log("THIS IS NOT IOT")
-    const body = {
-      model: 'Ccat',
-      messages: [
-        {
-          role: 'system',
-          content: mainPrompt
-        },
-        ...messages
-      ],
-    };
-
-    const response = await fetch('http://localhost:11434/api/chat', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const reader = response.body?.getReader();
-    if (!reader) {
-      throw new Error('Failed to read response body');
-    }
-
-    let content = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) {
-        break;
-      }
-      const rawjson = new TextDecoder().decode(value);
-      const json = JSON.parse(rawjson);
-
-      if (json.done === false) {
-        content += json.message.content;
-      }
-    }
-
-    return { role: 'assistant', content };
+    return await chat(messages, 'Ccat', mainPrompt+jailBreakPrompt);
   }
 };
 
-// chat 함수는 기존과 동일하게 사용
-export const IOTchat = async (messages: Message[]): Promise<Message> => {
+// chat 함수 리팩터
+export const chat = async (messages: Message[], _model: string, _prompt: string): Promise<Message> => {
+  const finalMessage: Message[] = [
+    {
+      role: 'system',
+      content: _prompt
+    }
+  ];
+  
   const body = {
-    model: 'Ccat',
-    messages: [...finalMessage, ...messages],
+    model: _model,
+    messages: [...finalMessage, ...messages]
   };
 
   const response = await fetch('http://localhost:11434/api/chat', {

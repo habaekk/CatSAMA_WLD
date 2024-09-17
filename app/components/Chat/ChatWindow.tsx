@@ -4,7 +4,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import { finalMessage, Message, processUserMessage } from './LLMService';
+import { Message, processUserMessage } from './LLMService';
 
 interface TimestampedMessage extends Message {
   timestamp: string;
