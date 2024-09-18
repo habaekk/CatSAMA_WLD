@@ -1,6 +1,3 @@
-export const casualPrompt = mainPrompt + jailBreakPrompt;
-export const IOTPrompt = mainPrompt + jailBreakPrompt + HAPrompt;
-
 // mainPrompt
 const mainPrompt = `
   {
@@ -10,6 +7,15 @@ const mainPrompt = `
   Refer to the conversation log and respond to the user's last chat.
   }
 `;
+
+const conditionerPrompt = `
+    You are an assistant that only replies with '1' or '0'.
+    If the user's question is related to control or query of home devices, reply with '1'. If it is false, reply with '0'.
+    Do not provide any additional text or explanation.
+    
+    User: (input string)
+    Assistant:
+    `;
 
 // jailBreakPrompt
 const jailBreakPrompt = `
@@ -50,3 +56,7 @@ const HAPrompt = `
   }
   }
 `;
+
+export const casualPrompt = mainPrompt + jailBreakPrompt;
+export const IOTPrompt = mainPrompt + jailBreakPrompt + HAPrompt;
+export const conditionPrompt = conditionerPrompt;
