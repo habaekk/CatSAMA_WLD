@@ -60,3 +60,8 @@ const HAPrompt = `
 export const casualPrompt = mainPrompt + jailBreakPrompt;
 export const IOTPrompt = mainPrompt + jailBreakPrompt + HAPrompt;
 export const conditionPrompt = conditionerPrompt;
+
+export interface Message {
+  role: 'assistant' | 'user' | 'system';
+  content: string;
+}

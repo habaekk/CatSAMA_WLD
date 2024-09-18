@@ -1,12 +1,7 @@
 import { parseResponse, ParsedResponse } from './LLMParser';
 import { executeCode } from './ExecuteCode';
 
-import { casualPrompt, conditionPrompt, IOTPrompt } from './prompts.js';
-
-export interface Message {
-  role: 'assistant' | 'user' | 'system';
-  content: string;
-}
+import { Message, casualPrompt, conditionPrompt, IOTPrompt } from './prompts';
 
 export const processUserMessage = async (messages: Message[]): Promise<Message> => {
 
@@ -15,25 +10,22 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
 
   if (isIotRelated) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
-    // console.log('this is IOT')
+    console.log('this is IOT')
     return await chat(messages, 'Ccat', IOTPrompt);
   } else {
     // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
-    // console.log('this is not IOT')
+    console.log('this is not IOT')
     return await chat(messages, 'Ccat', casualPrompt);
   }
 };
 
 async function llmCondition(inputString: string) {
-  // LLM에게 요청할 프롬프트 구성
   const bodyMessage: Message[] = [{role: 'system', content: inputString}];
 
   try {
     const content = (await chat(bodyMessage, 'llama3', conditionPrompt)).content
-    // 받은 응답을 정수로 변환
     const result = parseInt(content.trim(), 10);
 
-    // 1 또는 0이 아닌 응답에 대한 처리
     if (isNaN(result)) {
       throw new Error('Unexpected response format');
     }
