@@ -8,6 +8,8 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
   const userMessage = messages[messages.length - 1]?.content; // 마지막 메세지가 사용자 메세지
   const isIotRelated = await llmCondition(userMessage);
 
+  console.log(isIotRelated);
+
   if (isIotRelated) {
     // IoT 관련 질문인 경우 기존 chat 기능 수행
     console.log('this is IOT')
@@ -20,10 +22,11 @@ export const processUserMessage = async (messages: Message[]): Promise<Message> 
 };
 
 async function llmCondition(inputString: string) {
-  const bodyMessage: Message[] = [{role: 'system', content: inputString}];
+  const bodyMessage: Message[] = [{ role: 'system', content: inputString }];
 
   try {
-    const content = (await chat(bodyMessage, 'llama3', conditionPrompt)).content
+    const content = (await chat(bodyMessage, 'Ccat', conditionPrompt)).content
+    console.log(content)
     const result = parseInt(content.trim(), 10);
 
     if (isNaN(result)) {
