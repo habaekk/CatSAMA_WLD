@@ -25,9 +25,23 @@ export default function Home() {
   }, []);
 
   // Handler functions for API calls
-  const handleGetState = () => getState("example.entity_id");
+  const handleGetState = async () => {
+    try {
+      const stateData = await getState("example.entity_id");
+      console.log("Fetched State Data:", stateData); // 콘솔에 결과값 출력
+    } catch (error) {
+      console.error("Error fetching state:", error);
+    }
+  };
   const handleSetState = () => setState("example.entity_id", "new_state");
-  const handleGetService = () => getService();
+  const handleGetService = async () => {
+    try {
+      const serviceData = await getService();
+      console.log("Fetched Service Data:", serviceData); // 콘솔에 결과값 출력
+    } catch (error) {
+      console.error("Error getting service:", error);
+    }
+  };
   const handleCallService = () => callService("example_domain", "example_service", { key: "value" });
 
   return (
