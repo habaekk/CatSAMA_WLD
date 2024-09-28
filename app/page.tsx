@@ -24,15 +24,18 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  const entity = process.env.NEXT_PUBLIC_ENTITY;
+
   // Handler functions for API calls
   const handleGetState = async () => {
     try {
-      const stateData = await getState("example.entity_id");
-      console.log("Fetched State Data:", stateData); // 콘솔에 결과값 출력
+      const stateData = await getState(entity);
+      console.log("Fetched State:", stateData.state); // state 값만 출력
     } catch (error) {
       console.error("Error fetching state:", error);
     }
   };
+  
   const handleSetState = () => setState("example.entity_id", "new_state");
   const handleGetService = async () => {
     try {
@@ -42,7 +45,14 @@ export default function Home() {
       console.error("Error getting service:", error);
     }
   };
-  const handleCallService = () => callService("example_domain", "example_service", { key: "value" });
+  const handleCallService = async () => {
+    try {
+      const result = await callService("fan", "toggle", entity);
+      console.log("Service Call Result:", result); // 결과값 출력
+    } catch (error) {
+      console.error("Error calling service:", error);
+    }
+  };
 
   return (
     <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white">
