@@ -21,8 +21,6 @@ export interface ParsedResponse {
       } else {
         return { type: 'iot', code: null, content: response.replace('#IOT#', '').trim() };
       }
-    } else {
-      return { type: 'casual', code: null, content: response.replace('#CASUAL#', '').trim() };
     }
   };
   
