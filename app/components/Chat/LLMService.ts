@@ -1,4 +1,4 @@
-import { parseResponse, ParsedResponse } from './LLMParser';
+import { parseResponse, ParsedResponse } from './parseResponse';
 import { executeCode } from './ExecuteCode';
 
 import { Message, casualPrompt, conditionPrompt, IOTPrompt } from './prompts';
