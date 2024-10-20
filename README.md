@@ -1,3 +1,62 @@
-catSAMA-WLD project
 
-HomeIOT(HA) + LLM(llama3) + BlockChain(WLD)
+# 🐱 캣사마
+
+Home IoT(HA) + LLM(llama3) + Blockchain(WLD)을 결합한 프로젝트입니다.
+
+## 🔍 소개
+
+**캣사마**는 Home Assistant 기반의 스마트 홈 시스템에 대화형 인공지능(LLM)과 블록체인 기술(Worldcoin, WLD)을 통합한 혁신적인 프로젝트입니다. 귀여운 고양이 어시스턴트인 **CatSAMA**를 통해 사용자들은 자연어로 스마트 홈 기기를 제어할 수 있습니다.
+
+## ✨ 주요 기능
+
+-   **프라이버시 중심 설계**: **블록체인(Worldcoin), 로컬 LLM(Ollama), 로컬 스마트 홈 서버(Home Assistant)**를 활용하여 사용자 데이터의 프라이버시를 보호합니다. 외부 서버에 의존하지 않고 모든 처리가 로컬에서 이루어집니다.
+-   **스마트 홈 제어**: 자연어 명령을 통해 조명, 온도 조절기, 공기청정기 등 다양한 홈 기기를 제어합니다.
+-   **대화형 AI**: 로컬에서 실행되는 LLM(Ollama)을 활용하여 사용자와 자연스러운 대화를 나누고 명령을 이해합니다.
+-   **블록체인 인증**: Worldcoin(WLD)을 사용한 안전하고 분산된 사용자 인증 시스템을 제공합니다.
+-   **다크 모드 지원**: 사용자 환경에 맞게 라이트 모드와 다크 모드를 지원합니다.
+
+## 📁 프로젝트 구조
+```plain text 
+cat_sama_wld/
+├── .env.local
+├── next.config.mjs
+├── package.json
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── components/
+│   │   ├── Chat/
+│   │   ├── DarkMode/
+│   │   ├── Footer-Header/
+│   │   └── HA_API/
+│   ├── dashboard/
+│   ├── LLM/
+│   ├── settings/
+│   └── user/
+└── public/
+
+
+```
+
+## ⚙️ 설치 및 실행 방법
+[~~캣사마 웹 페이지~~]()
+### 사전 요구 사항
+-   **Ollama**
+-   **Home Assistant**
+
+### 설치 단계
+1. Ollama 설치
+2. llama3 모델 다운로드
+3. Home Assistant 설치
+4. 변수 설정
+
+## 🐾 사용 방법
+
+-   **홈 페이지**: 캣사마의 다양한 표정과 함께 메인 페이지를 탐색하세요.
+-   **대시보드**: Home Assistant의 정보를 실시간으로 확인할 수 있습니다.
+-   **Cat LLM**: 캣사마와 자연어로 대화하고 스마트 홈 기기를 제어하세요.
+-   **설정**: 다크 모드 전환 및 기타 설정을 변경할 수 있습니다.
+-   **사용자 페이지**: 월드 코인을 통한 안전한 로그인 및 프로필 관리를 제공합니다.
+
+
+## 🛡️ 라이선스

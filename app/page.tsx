@@ -47,7 +47,7 @@ export default function Home() {
   };
   const handleCallService = async () => {
     try {
-      const result = await callService("fan", "toggle", entity);
+      const result = await callService("fan", "toggle", {entity_id: entity}); // 데이터 형식 때문에 {entity_id: entity} 가 됨
       console.log("Service Call Result:", result); // 결과값 출력
     } catch (error) {
       console.error("Error calling service:", error);

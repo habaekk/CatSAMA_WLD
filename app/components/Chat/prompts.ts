@@ -79,6 +79,7 @@ const HAPrompt = `
     }
   }
   In case of Query of home device's state {
+  
   }
   }
 `;
