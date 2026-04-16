@@ -1,0 +1,72 @@
+name: Open PR To Master
+
+on:
+  push:
+    branches:
+      - "feat/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: feature-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create or reuse PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const head = context.ref.replace("refs/heads/", "");
+            const base = "master";
+
+            const { data: openPulls } = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: "open",
+              head: `${owner}:${head}`,
+              base,
+            });
+
+            if (openPulls.length > 0) {
+              core.info(`Open PR already exists: #${openPulls[0].number}`);
+              return;
+            }
+
+            const slug = head.replace(/^feat\//, "");
+            const titleText = slug
+              .split(/[\/_-]+/)
+              .filter(Boolean)
+              .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+              .join(" ");
+
+            const title = titleText ? `feat: ${titleText}` : `feat: ${head}`;
+            const body = [
+              "## Summary",
+              `- Auto-created from \`${head}\``,
+              `- Target branch: \`${base}\``,
+              "",
+              "## Checklist",
+              "- [ ] Review changes",
+              "- [ ] Confirm lint, test, and build pass",
+            ].join("\n");
+
+            const { data: pr } = await github.rest.pulls.create({
+              owner,
+              repo,
+              title,
+              head,
+              base,
+              body,
+              maintainer_can_modify: true,
+            });
+
+            core.info(`Created PR #${pr.number}`);
