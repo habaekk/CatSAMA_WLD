@@ -30,3 +30,27 @@ export interface AssistantApiResponse {
     timings: AssistantTimingMetrics;
   };
 }
+
+export interface AssistantPlanStep {
+  title: string;
+  detail: string;
+  timeHint: string;
+  targetEntityIds: string[];
+}
+
+export interface AssistantPlanSuggestion {
+  title: string;
+  summary: string;
+  rationale: string;
+  focusAreas: string[];
+  steps: AssistantPlanStep[];
+  fallback: string;
+}
+
+export interface AssistantPlanApiResponse {
+  plan: AssistantPlanSuggestion;
+  meta: {
+    entityCount: number;
+    generatedAt: string;
+  };
+}

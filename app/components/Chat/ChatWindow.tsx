@@ -15,9 +15,10 @@ const formatMs = (value: number) => `${(value / 1000).toFixed(2)}s`;
 
 interface ChatWindowProps {
   className?: string;
+  onConversationChange?: (messages: Message[]) => void;
 }
 
-const ChatWindow: React.FC<ChatWindowProps> = ({ className = '' }) => {
+const ChatWindow: React.FC<ChatWindowProps> = ({ className = '', onConversationChange }) => {
   const [messages, setMessages] = useState<TimestampedMessage[]>([]);
   const [loading, setLoading] = useState(false);
   const [metrics, setMetrics] = useState<AssistantClientMetrics | null>(null);
@@ -70,40 +71,46 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className = '' }) => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    onConversationChange?.(messages.map(({ role, content }) => ({ role, content })));
+  }, [messages, onConversationChange]);
+
   return (
     <div
       className={`flex h-full min-h-[720px] w-full flex-col overflow-hidden border border-white/10 bg-[rgba(8,11,18,0.46)] ${className}`}
     >
-      <div className="border-b border-white/10 px-5 py-4">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">Cat LLM</p>
-      </div>
-
-      <div className="flex-grow space-y-4 overflow-auto px-4 py-4" ref={chatWindowRef}>
-        {messages
-          .filter((msg) => msg.role !== 'system')
-          .map((msg, index) => (
-            <ChatMessage
-              key={index}
-              message={msg.content}
-              sender={msg.role === 'user' ? 'You' : 'Assistant'}
-              timestamp={msg.timestamp}
-              isOwnMessage={msg.role === 'user'}
-            />
-          ))}
-        {loading && <div className="text-sm text-[var(--text-muted)]">Assistant is typing...</div>}
-      </div>
-
-      <ChatInput onSendMessage={handleSendMessage} />
-
-      {metrics && (
-        <div className="border-t border-white/10 px-4 py-3 text-xs text-[var(--text-muted)]">
-          {`Client ${formatMs(metrics.clientTotalMs)} | Server ${formatMs(
-            metrics.serverTimings.totalMs
-          )} | LLM ${formatMs(metrics.serverTimings.llmMs)} | Post ${formatMs(
-            metrics.serverTimings.commandMs
-          )}`}
+      <div className="flex min-h-0 flex-1 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
+        <div className="border-b border-white/10 px-5 py-4">
+          <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">Cat LLM</p>
         </div>
-      )}
+
+        <div className="min-h-0 flex-grow space-y-4 overflow-auto px-4 py-4" ref={chatWindowRef}>
+          {messages
+            .filter((msg) => msg.role !== 'system')
+            .map((msg, index) => (
+              <ChatMessage
+                key={index}
+                message={msg.content}
+                sender={msg.role === 'user' ? 'You' : 'Assistant'}
+                timestamp={msg.timestamp}
+                isOwnMessage={msg.role === 'user'}
+              />
+            ))}
+          {loading && <div className="text-sm text-[var(--text-muted)]">Assistant is typing...</div>}
+        </div>
+
+        <ChatInput onSendMessage={handleSendMessage} />
+
+        {metrics && (
+          <div className="border-t border-white/10 px-4 py-3 text-xs text-[var(--text-muted)]">
+            {`Client ${formatMs(metrics.clientTotalMs)} | Server ${formatMs(
+              metrics.serverTimings.totalMs
+            )} | LLM ${formatMs(metrics.serverTimings.llmMs)} | Post ${formatMs(
+              metrics.serverTimings.commandMs
+            )}`}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
