@@ -1,5 +1,4 @@
-// ChatInput.tsx
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -24,24 +23,24 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSend();
     }
   };
 
   return (
-    <div className="flex items-center border-t border-gray-300 p-4 dark:border-gray-700">
+    <div className="flex items-center gap-3 border-t border-white/10 bg-black/10 p-4">
       <input
         ref={inputRef}
         type="text"
-        className="flex-grow p-2 border border-gray-300 rounded-lg dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-        placeholder="Type your message..."
-        onKeyPress={handleKeyPress}
+        className="flex-grow border border-white/10 bg-white/5 px-4 py-3 text-white outline-none placeholder:text-[var(--text-muted)]"
+        placeholder="Send a message to CatSAMA"
+        onKeyDown={handleKeyDown}
       />
       <button
         onClick={handleSend}
-        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg dark:bg-blue-700"
+        className="bg-[var(--brand)] px-5 py-3 font-semibold text-[#081018] transition hover:brightness-110"
       >
         Send
       </button>

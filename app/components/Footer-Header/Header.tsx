@@ -19,9 +19,6 @@ export default function Header() {
         <Link href="/LLM" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           Cat LLM
         </Link>
-        <Link href="/commerce" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
-          Commerce
-        </Link>
         <Link href="/settings" className="text-lg font-medium text-gray-700 hover:text-gray-900 cursor-pointer dark:text-white">
           Settings
         </Link>

@@ -61,7 +61,7 @@ export default function Settings() {
                 
                 <div className="flex flex-col space-y-2">
                   <label className="text-lg font-semibold text-black dark:text-white">LLM Settings Message</label>
-                  <textarea className="p-2 border rounded bg-white dark:bg-gray-700 text-black dark:text-white" rows="4" placeholder="Enter LLM settings message"></textarea>
+                  <textarea className="p-2 border rounded bg-white dark:bg-gray-700 text-black dark:text-white" rows={4} placeholder="Enter LLM settings message"></textarea>
                 </div>
               </div>
             )}

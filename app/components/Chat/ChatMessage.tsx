@@ -7,13 +7,19 @@ interface ChatMessageProps {
   isOwnMessage: boolean;
 }
 
-const ChatMessage: React.FC<ChatMessageProps> = ({ message, sender, timestamp, isOwnMessage }) => {
+const ChatMessage: React.FC<ChatMessageProps> = ({ message, timestamp, isOwnMessage }) => {
   return (
-    <div className={`flex flex-col mb-4 ${isOwnMessage ? 'items-end' : 'items-start'}`}>
-      <div className={`flex items-center ${isOwnMessage ? 'bg-blue-500 text-white dark:bg-blue-700' : 'bg-gray-200 text-black dark:bg-gray-700 dark:text-white'} rounded-lg p-2 max-w-xs`}>
-        <span>{message}</span>
+    <div className={`flex flex-col ${isOwnMessage ? 'items-end' : 'items-start'}`}>
+      <div
+        className={`max-w-[82%] rounded-2xl px-4 py-3 ${
+          isOwnMessage
+            ? 'bg-[var(--brand)] text-[#081018]'
+            : 'border border-white/10 bg-white/6 text-white'
+        }`}
+      >
+        <span className="whitespace-pre-wrap break-words">{message}</span>
       </div>
-      <span className="text-xs text-gray-500 dark:text-gray-400">{timestamp}</span>
+      <span className="mt-2 text-xs text-[var(--text-muted)]">{timestamp}</span>
     </div>
   );
 };

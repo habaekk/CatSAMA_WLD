@@ -1,83 +1,73 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { getState, setState, getService, callService } from "./components/HA_API/api"; // Import the API functions
+import ChatWindow from './components/Chat/ChatWindow';
+import HomeAssistantOverlayCards from './components/HA_Dashboard/HomeAssistantOverlayCards';
+
+const VTUBER_URL = process.env.NEXT_PUBLIC_VTUBER_URL ?? 'http://127.0.0.1:12393/';
+const OVERLAY_CARDS = [
+  {
+    entityId: 'fan.zhimi_airpurifier_mb4',
+    title: 'Air Flow',
+    accent: '#19e2cf',
+    x: 24,
+    y: 24,
+  },
+  {
+    entityId: 'weather.forecast_home',
+    title: 'Weather',
+    accent: '#5fb0ff',
+    x: 1020,
+    y: 24,
+  },
+  {
+    entityId: 'climate.living_room',
+    title: 'Living Climate',
+    accent: '#c788ff',
+    x: 24,
+    y: 560,
+  },
+  {
+    entityId: 'switch.coffee_machine',
+    title: 'Coffee',
+    accent: '#8ef58a',
+    x: 1020,
+    y: 560,
+  },
+  {
+    entityId: 'sensor.outdoor_temperature',
+    title: 'Outdoor Temp',
+    accent: '#ff7a59',
+    x: 522,
+    y: 24,
+  },
+];
 
 export default function Home() {
-  const images = [
-    "/cat/cat_sit.webp",
-    "/cat/cat_sleep.webp",
-    "/cat/cat_lie.webp",
-    "/cat/cat_sit2.webp",
-    "/cat/cat_walk.webp",
-    "/cat/cat_eat.webp"
-  ];
-
-  const [currentImage, setCurrentImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const entity = process.env.NEXT_PUBLIC_ENTITY;
-
-  // Handler functions for API calls
-  const handleGetState = async () => {
-    try {
-      const stateData = await getState(entity);
-      console.log("Fetched State:", stateData.state); // state 값만 출력
-    } catch (error) {
-      console.error("Error fetching state:", error);
-    }
-  };
-  
-  const handleSetState = () => setState("example.entity_id", "new_state");
-  const handleGetService = async () => {
-    try {
-      const serviceData = await getService();
-      console.log("Fetched Service Data:", serviceData); // 콘솔에 결과값 출력
-    } catch (error) {
-      console.error("Error getting service:", error);
-    }
-  };
-  const handleCallService = async () => {
-    try {
-      const result = await callService("fan", "toggle", {entity_id: entity}); // 데이터 형식 때문에 {entity_id: entity} 가 됨
-      console.log("Service Call Result:", result); // 결과값 출력
-    } catch (error) {
-      console.error("Error calling service:", error);
-    }
-  };
-
   return (
-    <main className="main-content flex min-h-screen flex-col items-center justify-center p-24 relative dark:text-white">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold">캣사마</h1>
-        <p className="text-lg text-gray-500">우리 집의 귀여운 고양이</p>
-      </div>
-      <div className="relative z-10">
-        <Image
-          src={images[currentImage]}
-          alt="Cat Image"
-          width={200}
-          height={200}
-          priority
-        />
-      </div>
-      <div className="text-center mt-8">
-        <p className="text-lg text-gray-500">CaaS - Cat as a Service</p>
-      </div>
-      <div className="mt-8 flex flex-col items-center">
-        <button onClick={handleGetState} className="bg-blue-500 text-white p-2 rounded m-2">Get State</button>
-        <button onClick={handleSetState} className="bg-green-500 text-white p-2 rounded m-2">Set State</button>
-        <button onClick={handleGetService} className="bg-purple-500 text-white p-2 rounded m-2">Get Service</button>
-        <button onClick={handleCallService} className="bg-red-500 text-white p-2 rounded m-2">Call Service</button>
-      </div>
-    </main>
+    <div className="grid gap-0 lg:h-[calc(100vh-64px)] lg:grid-cols-[1.35fr_0.65fr] lg:overflow-hidden">
+      <section className="p-4 md:p-6 lg:h-full">
+        <div className="relative aspect-video overflow-hidden border border-white/10 bg-[rgba(0,0,0,0.78)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(25,226,207,0.08),transparent_34%)]" />
+
+          <div className="absolute inset-0 z-10 overflow-hidden bg-black">
+            <iframe
+              src={VTUBER_URL}
+              title="Open LLM VTuber"
+              className="h-full w-full"
+              allow="microphone; camera"
+            />
+          </div>
+
+          <HomeAssistantOverlayCards
+            cards={OVERLAY_CARDS}
+            storageKey="home-overlay-card-positions-v1"
+          />
+        </div>
+      </section>
+
+      <section className="min-w-0 lg:flex lg:h-full lg:overflow-hidden">
+        <ChatWindow className="border-l-0 lg:h-full lg:min-h-0 lg:max-h-[calc(100vh-64px)]" />
+      </section>
+    </div>
   );
 }

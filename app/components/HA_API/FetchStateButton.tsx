@@ -2,7 +2,11 @@
 import React from 'react';
 import { getState } from './api';
 
-const FetchStateButton = ({ entityId }) => {
+type FetchStateButtonProps = {
+  entityId: string;
+};
+
+const FetchStateButton = ({ entityId }: FetchStateButtonProps) => {
     const handleFetchState = async () => {
         await getState(entityId);
     };

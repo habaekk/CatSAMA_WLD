@@ -2,7 +2,13 @@
 import React from 'react';
 import { callService } from './api';
 
-const CallServiceButton = ({ domain, service, serviceData }) => {
+type CallServiceButtonProps = {
+  domain: string;
+  service: string;
+  serviceData: Record<string, unknown>;
+};
+
+const CallServiceButton = ({ domain, service, serviceData }: CallServiceButtonProps) => {
     const handleCallService = async () => {
         await callService(domain, service, serviceData);
     };

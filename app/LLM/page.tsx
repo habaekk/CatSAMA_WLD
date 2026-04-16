@@ -3,10 +3,8 @@ import ChatWindow from '../components/Chat/ChatWindow';
 
 export default function LLM() {
   return (
-    <div className="main-content flex min-h-screen flex-col items-center justify-center p-6 relative">
-      <div className="flex justify-center items-center flex-grow w-full">
-        <ChatWindow />
-      </div>
+    <div className="p-6 lg:p-8">
+      <ChatWindow />
     </div>
   );
-};
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type KeyboardEvent } from 'react';
 
 export default function Code() {
   const [verificationCode, setVerificationCode] = useState('');
@@ -28,7 +28,7 @@ export default function Code() {
     }
   }
 
-  function handleKeyPress(event) {
+  function handleKeyPress(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
       handleCodeSubmit();
     }

@@ -1,91 +1,56 @@
-import { parseResponse, ParsedResponse } from './parseResponse';
-import { executeCode } from './ExecuteCode';
+'use client';
 
-import { Message, casualPrompt, conditionPrompt, IOTPrompt } from './prompts';
+import type {
+  AssistantApiResponse,
+  AssistantMessage,
+  AssistantTimingMetrics,
+} from '../../lib/assistant/types';
 
-export const processUserMessage = async (messages: Message[]): Promise<Message> => {
-
-  const userMessage = messages[messages.length - 1]?.content; // 마지막 메세지가 사용자 메세지
-  const isIotRelated = await llmCondition(userMessage);
-
-  console.log(isIotRelated);
-
-  if (isIotRelated) {
-    // IoT 관련 질문인 경우 기존 chat 기능 수행
-    console.log('this is IOT')
-    return await chat(messages, 'Ccat', IOTPrompt);
-  } else {
-    // IoT와 관련이 없는 경우 메인 프롬프트만 사용하여 대답
-    console.log('this is not IOT')
-    return await chat(messages, 'Ccat', casualPrompt);
-  }
-};
-
-async function llmCondition(inputString: string) {
-  const bodyMessage: Message[] = [{ role: 'system', content: inputString }];
-
-  try {
-    const content = (await chat(bodyMessage, 'Ccat', conditionPrompt)).content
-    console.log(content)
-    const result = parseInt(content.trim(), 10);
-
-    if (isNaN(result)) {
-      throw new Error('Unexpected response format');
-    }
-
-    return result;
-  } catch (error) {
-    console.error('Error:', error);
-    return null;
-  }
+export interface AssistantClientMetrics {
+  clientTotalMs: number;
+  serverTimings: AssistantTimingMetrics;
 }
 
-// chat 함수 리팩터
-const chat = async (messages: Message[], _model: string, _prompt: string): Promise<Message> => {
-  const prompt: Message[] = [
-    {
-      role: 'system',
-      content: _prompt
-    }
-  ];
-  
-  const body = {
-    model: _model,
-    messages: [...prompt, ...messages]
-  };
+export interface ProcessUserMessageResult {
+  message: AssistantMessage;
+  metrics: AssistantClientMetrics;
+}
 
-  const response = await fetch('http://localhost:11434/api/chat', {
+export const processUserMessage = async (
+  messages: AssistantMessage[]
+): Promise<ProcessUserMessageResult> => {
+  const requestStartedAt = performance.now();
+  const response = await fetch('/api/assistant', {
     method: 'POST',
-    body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ messages }),
   });
 
-  const reader = response.body?.getReader();
-  if (!reader) {
-    throw new Error('Failed to read response body');
-  }
+  if (!response.ok) {
+    let errorMessage = 'Assistant request failed.';
 
-  let content = '';
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) {
-      break;
+    try {
+      const errorBody = (await response.json()) as { error?: string };
+      if (typeof errorBody.error === 'string' && errorBody.error.length > 0) {
+        errorMessage = errorBody.error;
+      }
+    } catch {
+      // Fall back to the default error message when the response body is not JSON.
     }
-    const rawjson = new TextDecoder().decode(value);
-    const json = JSON.parse(rawjson);
 
-    if (json.done === false) {
-      content += json.message.content;
-    }
+    throw new Error(errorMessage);
   }
 
-  const parsedResponse: ParsedResponse = parseResponse(content);
-  
-  if ( parsedResponse.code ) { 
-    await executeCode(parsedResponse.code);
-  }
+  const data = (await response.json()) as AssistantApiResponse;
+  const requestCompletedAt = performance.now();
 
-  return { role: 'assistant', content: parsedResponse.content };
+  return {
+    message: data.message,
+    metrics: {
+      clientTotalMs: Number((requestCompletedAt - requestStartedAt).toFixed(1)),
+      serverTimings: data.meta.timings,
+    },
+  };
 };

@@ -1,19 +1,17 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
 import RecoilRootProvider from './components/RecoilRootProvider';
 import DarkMode from './components/DarkMode/DarkMode';
-import Header from './components/Footer-Header/Header';
-import Footer from './components/Footer-Header/Footer';
+import AppShell from './components/AppShell';
 
-const inter = Inter({ subsets: ['latin'] });
+const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'CatSAMA',
   description: 'Web page of CatSAMA, cute assistant.',
   icons: {
-    icon: '/logo.webp', // 파비콘 경로 설정
-
+    icon: '/logo.webp',
   },
 };
 
@@ -40,17 +38,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} dark:bg-gray-800`}>
+      <body className={notoSansKr.className}>
         <RecoilRootProvider>
-          <header>
-            <Header />            
-          </header>
-          <main className="main-content">
-            {children}
-          </main>
-          <footer>
-            <Footer />
-          </footer>
+          <AppShell>{children}</AppShell>
           <DarkMode />
         </RecoilRootProvider>
       </body>
