@@ -3,7 +3,7 @@ name: Open PR To Master
 on:
   push:
     branches:
-      - "feat/**"
+      - "**/**"
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: feature-pr-${{ github.ref }}
+  group: open-pr-to-master-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -41,14 +41,15 @@ jobs:
               return;
             }
 
-            const slug = head.replace(/^feat\//, "");
+            const slug = head.replace(/^[^/]+\//, "");
             const titleText = slug
               .split(/[\/_-]+/)
               .filter(Boolean)
               .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
               .join(" ");
 
-            const title = titleText ? `feat: ${titleText}` : `feat: ${head}`;
+            const prefix = head.includes("/") ? head.split("/")[0] : "branch";
+            const title = titleText ? `${prefix}: ${titleText}` : `${prefix}: ${head}`;
             const body = [
               "## Summary",
               `- Auto-created from \`${head}\``,
