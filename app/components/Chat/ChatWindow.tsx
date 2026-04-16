@@ -79,12 +79,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className = '', onConversationC
     <div
       className={`flex h-full min-h-[720px] w-full flex-col overflow-hidden border border-white/10 bg-[rgba(8,11,18,0.46)] ${className}`}
     >
-      <div className="flex min-h-0 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
+      <div className="flex min-h-0 flex-1 flex-col border-b border-white/10 lg:border-b-0 lg:border-r">
         <div className="border-b border-white/10 px-5 py-4">
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">Cat LLM</p>
         </div>
 
-        <div className="flex-grow space-y-4 overflow-auto px-4 py-4" ref={chatWindowRef}>
+        <div className="min-h-0 flex-grow space-y-4 overflow-auto px-4 py-4" ref={chatWindowRef}>
           {messages
             .filter((msg) => msg.role !== 'system')
             .map((msg, index) => (
