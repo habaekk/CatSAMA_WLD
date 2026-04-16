@@ -52,7 +52,7 @@ export default function Home() {
     <div className="grid gap-0 lg:h-[calc(100vh-64px)] lg:grid-cols-[1.35fr_0.65fr] lg:overflow-hidden">
       <section className="min-h-0 lg:h-full">
         <div className="flex h-full min-h-0 flex-col overflow-hidden p-4 md:p-6">
-          <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+          <div className="hidden-scrollbar flex-1 min-h-0 overflow-y-auto pr-1">
             <div className="space-y-6">
               <div className="relative aspect-video overflow-hidden border border-white/10 bg-[rgba(0,0,0,0.78)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(25,226,207,0.08),transparent_34%)]" />
